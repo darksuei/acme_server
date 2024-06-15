@@ -16,6 +16,10 @@ const goalSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    isCompleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

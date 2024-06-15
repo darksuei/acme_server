@@ -5,7 +5,7 @@ const patchGoal = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const { title, description, status } = req.body;
+    const { title, description, status, isCompleted } = req.body;
 
     const goal = await Goal.findById(id);
 
@@ -17,10 +17,11 @@ const patchGoal = async (req, res) => {
     goal.title = title || goal.title;
     goal.description = description || goal.description;
     goal.status = status || goal.status;
+    goal.isCompleted = isCompleted ?? goal.isCompleted;
 
-    await goal.save();
+    const updatedGoal = await goal.save();
 
-    return res.status(httpStatus.OK).json({ message: "Goal updated successfully" });
+    return res.status(httpStatus.OK).json({ message: "Goal updated successfully", goal: updatedGoal });
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
