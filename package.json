@@ -1,16 +1,17 @@
 {
   "name": "task_master_be",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "clear && node index.js",
-    "dev": "clear && nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cookie-session": "^2.1.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "http-status": "^1.7.4",

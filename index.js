@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const { connectToDatabase } = require("./config/database.config");
 const httpStatus = require("http-status");
 const passport = require("passport");
@@ -14,13 +15,16 @@ require("./services/passport");
 // Initialize Express
 const app = express();
 
+const PORT = process.env.PORT;
+const SESSION_SECRET = process.env.SESSION_SECRET;
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Session Configuration
 app.use(
   session({
-    secret: "secret",
+    secret: SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
     cookie: { secure: false },
@@ -44,9 +48,9 @@ app.use((_req, res) => {
   return res.status(httpStatus.NOT_FOUND).json({ message: "Route not found" });
 });
 
-//Todo: Modularize server bootstrap
-app.listen(5000, async () => {
+// Server Bootstrap
+app.listen(PORT, async () => {
   await connectToDatabase();
-  console.log("Server is running on port 5000");
+  console.log(`Server is running on port ${PORT}`);
   console.log(`Server is running in ${process.env.NODE_ENV} mode`);
 });

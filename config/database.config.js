@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
+const MONGO_URI = process.env.MONGO_URI;
 
 module.exports = {
   async connectToDatabase() {
     try {
       mongoose.set("strictQuery", false);
-      await mongoose.connect("mongodb://localhost:27017/task_master");
-      console.log("Database connected");
+      await mongoose.connect(MONGO_URI);
+      console.log("Successfully connected to database.");
     } catch (error) {
-      console.log("Database connection failed");
+      console.log("Failed to connect to database.");
     }
   },
 };
