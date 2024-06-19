@@ -1,0 +1,171 @@
+body {
+  overflow-x: hidden;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+}
+header {
+  background: #fafbfd;
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid #c9c9c9;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 2em;
+  box-sizing: border-box;
+}
+header > a {
+  cursor: pointer;
+}
+
+section {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0;
+}
+
+nav {
+  width: 300px;
+  height: calc(100vh - 80px);
+  background: #fafbfdb7;
+  border-right: 1px solid #c9c9c9;
+  display: flex;
+  flex-direction: column;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  padding-block: 1em;
+  gap: 0.75em;
+}
+
+.settings,
+.dashboard {
+  font-weight: 400;
+  font-size: 16px;
+  width: 250px;
+  background: #c9c9c9;
+  border-radius: 10px;
+  cursor: pointer !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 1em;
+}
+h4 {
+  margin: 0;
+}
+.dashboard {
+  color: black;
+  text-decoration: none;
+}
+.settings {
+  background: #8b8b8b;
+}
+.settings:hover,
+.dashboard:hover {
+  background: #b9b9b944;
+}
+
+main {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 2em 2.5em;
+  gap: 1em;
+}
+
+.text3 {
+  font-weight: 600;
+  font-size: 32px;
+  margin: 0;
+}
+
+.text4 {
+  font-weight: 300;
+  font-size: 16px;
+  margin: 0;
+}
+
+.settingsform {
+  border: 1px solid #c9c9c9;
+  border-radius: 20px;
+  padding: 1.5em 2em;
+}
+
+.text6 {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.text7 {
+  font-weight: 400;
+  font-size: 14px;
+  color: #b9b9b9;
+  margin-bottom: 1.5em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5em;
+  font-size: 16px;
+}
+
+.input-group > label {
+  margin-bottom: 0;
+  font-size: 16px;
+}
+
+.input-group > input {
+  width: 500px;
+  padding: 1em;
+  border-radius: 6px;
+  box-shadow: 0 0 2px rgba(128, 128, 128, 0.863);
+  border: none;
+}
+
+.input-group > p {
+  margin-block: 0;
+  margin-top: 0.5em;
+  font-size: 14px;
+  color: rgba(94, 94, 94, 0.719);
+}
+
+button {
+  height: 50px;
+  width: 100px;
+  border-radius: 50px;
+  border: 1px solid rgb(21, 21, 21);
+}
+
+label {
+  font-size: 16px;
+}
+.text5 {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  position: relative;
+  bottom: 7px;
+  color: rgba(94, 94, 94, 0.719);
+  font-weight: 200;
+}
+.btn3 {
+  width: 250px;
+  height: 40px;
+  color: white;
+  background: black;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+}

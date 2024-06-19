@@ -3,6 +3,7 @@ const Task = require("../../models/task");
 
 const postCreateTask = async (req, res) => {
   try {
+    console.log(req.body);
     const { title } = req.body;
 
     const task = new Task({
@@ -12,7 +13,7 @@ const postCreateTask = async (req, res) => {
 
     await task.save();
 
-    return res.status(httpStatus.CREATED).json({ message: "Task created successfully" });
+    return res.redirect("/dashboard");
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }

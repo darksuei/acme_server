@@ -1,7 +1,8 @@
-const httpStatus = require("http-status");
+const Task = require("../../models/task");
 
-const postLogin = async (_req, res) => {
-  return res.status(httpStatus.OK).json({ message: "User logged in successfully" });
+const postLogin = async (req, res) => {
+  console.log(`${req.user.email} logged in successfully`);
+  return res.redirect("/dashboard");
 };
 
 module.exports = postLogin;

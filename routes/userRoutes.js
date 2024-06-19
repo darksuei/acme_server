@@ -4,7 +4,7 @@ const postLogin = require("../controllers/users/postLogin");
 const passport = require("passport");
 const getUser = require("../controllers/users/getUser");
 const authenticate = require("../middlewares/authenticate");
-const patchUser = require("../controllers/users/patchUser");
+const postUpdateUser = require("../controllers/users/postUpdateUser");
 
 const router = express.Router();
 
@@ -14,6 +14,6 @@ router.route("/register").post(postRegister);
 
 router.route("/login").post(passport.authenticate("local"), postLogin);
 
-router.route("/update-user").patch(authenticate, patchUser);
+router.route("/update-user").post(authenticate, postUpdateUser);
 
 module.exports = router;

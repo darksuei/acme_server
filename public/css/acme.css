@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+html {
+  width: 100vw;
+}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+header {
+  width: 80%;
+  margin-inline: auto;
+  height: 100px;
+  padding-inline: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+header > div {
+  display: flex;
+  gap: 20px;
+}
+
+.btn1 {
+  background: black;
+  color: white;
+  width: 70px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn2 {
+  background: rgb(214, 214, 214);
+  color: black;
+  width: 70px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.text1 {
+  font-size: 60px;
+  text-align: center;
+  font-weight: 600;
+  margin-block: 0 !important;
+}
+.text2 {
+  font-size: 22px;
+  line-height: 28px;
+  text-align: center;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.795);
+}
+.btn3 {
+  background: black;
+  color: white;
+  width: 160px;
+  height: 40px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.svg1 {
+  position: relative;
+  left: -7px;
+  top: 2px;
+}

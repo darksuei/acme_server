@@ -1,6 +1,6 @@
 const httpStatus = require("http-status");
 
-const patchUser = async (req, res) => {
+const postUpdateUser = async (req, res) => {
   try {
     const user = req.user;
     const { body } = req;
@@ -18,11 +18,11 @@ const patchUser = async (req, res) => {
 
     await user.save();
 
-    return res.status(httpStatus.OK).json({ user });
+    return res.redirect("/dashboard");
   } catch (error) {
     console.log(error);
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "Internal server error" });
   }
 };
 
-module.exports = patchUser;
+module.exports = postUpdateUser;
