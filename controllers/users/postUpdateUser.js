@@ -1,5 +1,3 @@
-const httpStatus = require("http-status");
-
 const postUpdateUser = async (req, res) => {
   try {
     const user = req.user;
@@ -10,7 +8,7 @@ const postUpdateUser = async (req, res) => {
 
     const isValidOperation = Object.keys(body).every((key) => allowedKeys.includes(key));
 
-    if (!isValidOperation) return res.status(httpStatus.BAD_REQUEST).json({ message: "Invalid fields." });
+    if (!isValidOperation) return res.redirect("/settings", { error: "Invalid fields!" });
 
     Object.keys(body).forEach((key) => {
       user[key] = body[key];
@@ -18,10 +16,9 @@ const postUpdateUser = async (req, res) => {
 
     await user.save();
 
-    return res.redirect("/dashboard");
+    return res.redirect("/settings");
   } catch (error) {
-    console.log(error);
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "Internal server error" });
+    return res.redirect("/settings");
   }
 };
 

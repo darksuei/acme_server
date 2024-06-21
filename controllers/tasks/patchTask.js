@@ -21,7 +21,7 @@ const patchTask = async (req, res) => {
 
     return res.status(httpStatus.OK).json({ message: "Task updated successfully", task: updatedTask });
   } catch (error) {
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 

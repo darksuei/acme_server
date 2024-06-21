@@ -112,7 +112,7 @@ main {
   margin: 0;
 }
 .btn1 {
-  width: 110px;
+  min-width: 110px;
   height: 40px;
   background: black;
   color: white;
@@ -123,6 +123,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-inline: 1em;
 }
 .popup {
   display: none;
@@ -248,7 +249,7 @@ input {
 .text6 {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-align: left;
-  margin-block: 1em;
+  margin-block: auto;
 }
 .text7 {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -268,24 +269,17 @@ input {
   align-items: center;
   margin-top: 1em;
   padding-inline: 1em;
+  margin-bottom: 1em;
 }
 
 .goal-container {
-  width: 300px;
-  margin: 20px auto;
+  margin: 0 auto;
 }
 
 .goal-input {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-}
-
-.goal-input input {
-  margin-bottom: 10px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
 .goal-input button {
@@ -295,6 +289,8 @@ input {
   padding: 10px;
   cursor: pointer;
   border-radius: 5px;
+  width: 75%;
+  margin-inline: auto;
 }
 
 .goal-input button:hover {
@@ -335,6 +331,81 @@ input {
 }
 
 .calender {
-  width: 34%;
-  height: 400px;
+  padding: 2em;
+  border: 1px solid #c0c0c0;
+  min-width: 450px;
+  max-height: 450px;
+  cursor: pointer;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5em;
+  font-size: 16px;
+}
+
+.input-group > label {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.input-group > input,
+.input-group > select {
+  padding: 1em;
+  border-radius: 6px;
+  box-shadow: 0 0 2px rgba(128, 128, 128, 0.863);
+  border: none;
+  margin-bottom: 1em;
+  padding: 0.8em 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.priority {
+  color: rgba(175, 59, 59, 0.863);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #a2a2a2;
+  font-size: 14px;
+}
+
+.icons > p {
+  cursor: pointer;
+}
+
+.goals-note {
+  font-size: 14px;
+  color: #828282;
+  font-style: italic;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.make-priority {
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0.75em 1em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.a-unstyled {
+  text-decoration: none;
+  color: black;
 }

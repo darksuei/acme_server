@@ -23,7 +23,7 @@ const patchGoal = async (req, res) => {
 
     return res.status(httpStatus.OK).json({ message: "Goal updated successfully", goal: updatedGoal });
   } catch (error) {
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 

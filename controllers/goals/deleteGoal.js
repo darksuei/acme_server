@@ -14,9 +14,9 @@ const deleteGoal = async (req, res) => {
 
     await Goal.deleteOne({ _id: id });
 
-    res.status(httpStatus.OK).json({ message: "Goal deleted successfully" });
+    return res.status(httpStatus.OK).json({ message: "Goal deleted successfully" });
   } catch (error) {
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 

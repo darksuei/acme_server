@@ -4,13 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/dashboard.css" />
-    <title>TaskMaster | Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js"></script>
+    <title>TaskMaster | Dashboard</title>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        const goals = <%- JSON.stringify(goals) %>;
+
+        const events = goals.map((goal) => {
+          return {
+            title: goal.title,
+            start: goal.createdAt,
+            end: goal.dueDate,
+          };
+        });
+
         var calendarEl = document.getElementById("calendar");
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: "dayGridMonth",
+          headerToolbar: {
+            left: 'prev, next',
+            center: 'title',
+            right: 'dayGridMonth,timeGridDay'
+          },
+          events: events,
+          editable: true
         });
         calendar.render();
       });
@@ -98,6 +116,32 @@
           </svg>
           <h4 class="text2">Dashboard</h4>
         </a>
+
+        <a href="/schedule" class="settings">
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 48 48">
+            <title>cogwheel</title>
+            <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
+              <circle
+                data-color="color-2"
+                cx="24"
+                cy="24"
+                r="7"
+                fill="none"
+                stroke-linecap="square"
+                stroke-miterlimit="10"
+              ></circle>
+              <path
+                d="M46,27V21L39.6,20.466a15.89,15.89,0,0,0-2.072-4.991l4.155-4.91L37.435,6.322l-4.91,4.155A15.876,15.876,0,0,0,27.534,8.4L27,2H21l-.534,6.4a15.89,15.89,0,0,0-4.991,2.072l-4.91-4.155L6.322,10.565l4.155,4.91A15.876,15.876,0,0,0,8.4,20.466L2,21v6l6.4.534a15.89,15.89,0,0,0,2.072,4.991l-4.155,4.91,4.243,4.243,4.91-4.155A15.876,15.876,0,0,0,20.466,39.6L21,46h6l.534-6.405a15.89,15.89,0,0,0,4.991-2.072l4.91,4.155,4.243-4.243-4.155-4.91A15.876,15.876,0,0,0,39.6,27.534Z"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="square"
+                stroke-miterlimit="10"
+              ></path>
+            </g>
+          </svg>
+          <h4 class="text1">Schedule</h4>
+        </a>
+
         <a href="/settings" class="settings">
           <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 48 48">
             <title>cogwheel</title>
@@ -132,33 +176,93 @@
               <h2 class="text4">These are your tasks for the day.</h2>
             </div>
 
-            <button id="openPopupBtn" class="btn1">
-              <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <title>add</title>
-                <g fill="none" class="nc-icon-wrapper">
-                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"></path>
-                </g>
-              </svg>
-              New Task
-            </button>
+            <div class="btn-group">
+              <button id="openTaskPopupBtn" class="btn1">
+                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <title>add</title>
+                  <g fill="none" class="nc-icon-wrapper">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"></path>
+                  </g>
+                </svg>
+                New Task
+              </button>
+              <button class="btn1" onclick="generateSchedule()">Generate Schedule</button>
+            </div>
           </div>
 
-          <div id="popup" class="popup">
+          <div id="taskPopup" class="popup">
             <div class="popup-content">
-              <span id="closePopupBtn" class="close">&times;</span>
-
+              <span id="closeTaskPopupBtn" class="close">&times;</span>
+              <h1 class="text5">New Task</h1>
               <form method="post" action="/api/task/create-task">
-                <input type="text" class="new-item-input" name="title" required placeholder="Title" />
-                <button type="submit" id="add-button">Add Task</button>
+                <div class="input-group">
+                  <input type="text" class="new-item-input" name="title" required placeholder="Title" />
+                </div>
+                <button type="submit" id="add-button" class="task-button">Continue</button>
               </form>
+            </div>
+          </div>
 
-              <h1 class="text5">GOAL</h1>
+          <div id="editGoalPopup" class="popup">
+            <div class="popup-content">
+              <span id="closeEditGoal" class="close">&times;</span>
+              <h1 class="text5">Edit Goal</h1>
               <div class="goal-container">
                 <form class="goal-input" method="post" action="/api/goal/create-goal">
-                  <input type="text" id="goalTitle" placeholder="Title" name="title" />
-                  <input type="text" id="goalNote" placeholder="Description" name="description" />
-                  <input type="date" id="goalNote" placeholder="Due Date" name="dueDate" />
-                  <button type="submit">Add Goal</button>
+                  <div class="input-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="goalTitle" placeholder="Title" name="title" />
+                  </div>
+                  <div class="input-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="goalNote" placeholder="Description" name="description" />
+                  </div>
+                  <div class="input-group">
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" id="goalNote" placeholder="Due Date" name="dueDate" />
+                  </div>
+                  <div class="input-group">
+                    <label for="priority">Priority</label>
+                    <select name="priority" id="priority">
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                    </select>
+                  </div>
+                  <button type="submit">Continue</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div id="goalPopup" class="popup">
+            <div class="popup-content">
+              <span id="closeGoalPopupBtn" class="close">&times;</span>
+              <h1 class="text5">New Goal</h1>
+
+              <div class="goal-container">
+                <form class="goal-input" method="post" action="/api/goal/create-goal">
+                  <div class="input-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="goalTitle" placeholder="Title" name="title" />
+                  </div>
+                  <div class="input-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="goalNote" placeholder="Description" name="description" />
+                  </div>
+                  <div class="input-group">
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" id="goalNote" placeholder="Due Date" name="dueDate" />
+                  </div>
+                  <div class="input-group">
+                    <label for="priority">Priority</label>
+                    <select name="priority" id="priority">
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                    </select>
+                  </div>
+                  <button type="submit">Continue</button>
                 </form>
               </div>
             </div>
@@ -219,7 +323,7 @@
 
           <div class="goals-header">
             <h1 class="text6">Goals</h1>
-            <button id="openPopupBtn" class="btn1">
+            <button id="openGoalPopupBtn" class="btn1">
               <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <title>add</title>
                 <g fill="none" class="nc-icon-wrapper">
@@ -236,39 +340,44 @@
               <div class="goal-header">
                 <div class="goal-header-text">
                   <h3><%= item.title %></h3>
-                  <p class="text7"><%= item.created %></p>
+                  <p class="priority"><%= item.priority.toUpperCase() %></p>
+                  <p class="text7">Deadline: <%= item.deadline.toUpperCase() %></p>
                 </div>
-                <button class="delete-btn" onclick="deleteGoal('<%= item._id %>')">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 48 48">
-                    <title>trash can</title>
-                    <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
-                      <path
-                        d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16"
-                        fill="none"
-                        stroke="#000000"
-                        stroke-divnecap="square"
-                        stroke-miterlimit="10"
-                      ></path>
-                      <line
-                        data-color="color-2"
-                        x1="4"
-                        y1="10"
-                        x2="44"
-                        y2="10"
-                        fill="none"
-                        stroke-linecap="square"
-                        stroke-miterlimit="10"
-                      ></line>
-                      <path
-                        data-cap="butt"
-                        data-color="color-2"
-                        d="M17,10V2H31v8"
-                        fill="none"
-                        stroke-miterlimit="10"
-                      ></path>
-                    </g>
-                  </svg>
-                </button>
+
+                <div class="icons">
+                  <!-- <p id="editGoal">Edit</p> -->
+                  <button class="delete-btn" onclick="deleteGoal('<%= item._id %>')">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 48 48">
+                      <title>trash can</title>
+                      <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
+                        <path
+                          d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16"
+                          fill="none"
+                          stroke="#000000"
+                          stroke-divnecap="square"
+                          stroke-miterlimit="10"
+                        ></path>
+                        <line
+                          data-color="color-2"
+                          x1="4"
+                          y1="10"
+                          x2="44"
+                          y2="10"
+                          fill="none"
+                          stroke-linecap="square"
+                          stroke-miterlimit="10"
+                        ></line>
+                        <path
+                          data-cap="butt"
+                          data-color="color-2"
+                          d="M17,10V2H31v8"
+                          fill="none"
+                          stroke-miterlimit="10"
+                        ></path>
+                      </g>
+                    </svg>
+                  </button>
+                </div>
               </div>
               <div class="goal-note">
                 <p><%= item.description %></p>
@@ -280,6 +389,7 @@
         <div id="calendar" class="calender"></div>
       </main>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="/js/dashboard.js"></script>
     <script src="/js/api.js"></script>
   </body>

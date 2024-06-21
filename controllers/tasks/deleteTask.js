@@ -14,9 +14,9 @@ const deleteTask = async (req, res) => {
 
     await Task.deleteOne({ _id: id });
 
-    res.status(httpStatus.OK).json({ message: "Task deleted successfully" });
+    return res.status(httpStatus.OK).json({ message: "Task deleted successfully" });
   } catch (error) {
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 

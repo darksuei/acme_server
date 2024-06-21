@@ -9,6 +9,7 @@ const session = require("express-session");
 const userRouter = require("./routes/userRoutes");
 const goalRouter = require("./routes/goalRoutes");
 const taskRouter = require("./routes/taskRoutes");
+const scheduleRouter = require("./routes/scheduleRoutes");
 const moment = require("moment");
 
 const Task = require("./models/task");
@@ -51,6 +52,7 @@ app.use(passport.session());
 app.use("/api/user", userRouter);
 app.use("/api/goal", goalRouter);
 app.use("/api/task", taskRouter);
+app.use("/api/schedule", scheduleRouter);
 
 // Home Route
 app.get("/", (_req, res) => {
@@ -77,15 +79,35 @@ app.get("/dashboard", authenticateClient, async (req, res) => {
 
   goals.map((goal) => {
     goal.created = moment(goal.createdAt).fromNow();
+    goal.deadline = moment(goal.dueDate).format("LL");
     return goal;
   });
 
-  return res.render("dashboard", { tasks, goals, currentDate });
+  return res.render("dashboard", {
+    tasks,
+    goals,
+    currentDate,
+  });
 });
 
 app.get("/settings", authenticateClient, (req, res) => {
   const user = req.user;
   return res.render("settings", user);
+});
+
+app.get("/schedule", authenticateClient, async (req, res) => {
+  const goals = await Goal.find({ userId: req.user._id });
+
+  goals.map((goal) => {
+    goal.created = moment(goal.createdAt).fromNow();
+    goal.deadline = moment(goal.dueDate).format("LL");
+    return goal;
+  });
+
+  return res.render("schedule", {
+    goals: goals.sort((a, b) => a.edfIndex - b.edfIndex),
+    hasSchedule: req.user.hasSchedule,
+  });
 });
 
 // Health Check Route

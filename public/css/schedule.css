@@ -1,0 +1,29 @@
+.schedule-main {
+  display: flex;
+  flex-direction: column;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-align: left;
+  gap: 1em;
+}
+
+.schedule-main > h1 {
+  margin-bottom: 0;
+}
+
+.goals-header {
+  margin-bottom: 0;
+}
+
+.no-schedule {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-block: 3em;
+  color: #9a9a9a;
+  font-style: italic;
+  font-size: 1.5em;
+}
+
+.calender {
+  max-height: 1000px;
+}

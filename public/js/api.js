@@ -49,31 +49,14 @@ function convertToBoolean(value) {
   }
 }
 
-// Submit Form Wrapper Function
-function submitForm(formId, url, redirectUrl) {
-  const form = document.getElementById(formId);
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-    const formDataObject = Object.fromEntries(formData.entries());
-
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formDataObject),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (redirectUrl) {
-          window.location.href = redirectUrl;
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
+function generateSchedule() {
+  fetch("/api/schedule/create-schedule", {
+    method: "POST",
+  })
+    .then((response) => response.json())
+    .then((data) => {})
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+  notyf.success("Schedule generated successfully!");
 }

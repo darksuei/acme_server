@@ -3,8 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings</title>
-    <link rel="stylesheet" href="/css/settings.css" />
+    <title>TaskMaster | Schedule</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/schedule.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const goals = <%- JSON.stringify(goals) %>;
+        // const goals = JSON.parse(goals_str);
+
+        const events = goals.map((goal) => {
+          return {
+            title: goal.title,
+            start: goal.createdAt,
+            end: goal.dueDate,
+          };
+        });
+
+        var calendarEl = document.getElementById("calendar");
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "dayGridMonth",
+          headerToolbar: {
+            left: 'prev, next, today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          },
+          events: events,
+          editable: true
+        });
+        calendar.render();
+      });
+    </script>
   </head>
   <body>
     <header>
@@ -36,7 +66,7 @@
 
     <section>
       <nav class="header2">
-        <a href="/dashboard" class="dashboard">
+        <a href="/dashboard" class="settings">
           <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24">
             <title>home 3</title>
             <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
@@ -114,7 +144,7 @@
           <h4 class="text1">Schedule</h4>
         </a>
 
-        <div class="settings">
+        <a href="/settings" class="settings">
           <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 48 48">
             <title>cogwheel</title>
             <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
@@ -137,51 +167,72 @@
             </g>
           </svg>
           <h4 class="text1">Settings</h4>
-        </div>
+        </a>
       </nav>
 
-      <main>
-        <h1 class="text3">Settings</h1>
-        <h3 class="text4">General</h3>
+      <% if (hasSchedule == true) { %>
+      <main class="schedule-main">
+        <!-- <h1>Your Schedule</h1> -->
+        <p class="goals-note">
+          *Note: Goals are listed in order of priority according to the EDF algorithm..
+        </p>
+        <div id="calendar" class="calender"></div>
+        <div id="goalsList">
+          <% goals.forEach(function(item) { %>
+          <div class="goal-item">
+            <div class="goal-header">
+              <div class="goal-header-text">
+                <h3><%= item.title %></h3>
+                <p class="priority"><%= item.priority.toUpperCase() %> PRIORITY</p>
+                <p class="text7">Deadline: <%= item.deadline.toUpperCase() %></p>
+              </div>
 
-        <div class="settingsform">
-          <h1 class="text6">User Information</h1>
-          <h3 class="text7">Make changes and save to update your user infomation</h3>
-          <form action="/api/user/update-user" method="post">
-            <div class="input-group">
-              <label for="fullname">Full Name</label>
-              <input type="text" placeholder="Full Name" name="fullName" value="<%= fullName %>" />
-              <p class="text5">This is your full name</p>
+              <div class="icons">
+                <!-- <p id="editGoal">Edit</p> -->
+                <button class="delete-btn" onclick="deleteGoal('<%= item._id %>')">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 48 48">
+                    <title>trash can</title>
+                    <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
+                      <path
+                        d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16"
+                        fill="none"
+                        stroke="#000000"
+                        stroke-divnecap="square"
+                        stroke-miterlimit="10"
+                      ></path>
+                      <line
+                        data-color="color-2"
+                        x1="4"
+                        y1="10"
+                        x2="44"
+                        y2="10"
+                        fill="none"
+                        stroke-linecap="square"
+                        stroke-miterlimit="10"
+                      ></line>
+                      <path
+                        data-cap="butt"
+                        data-color="color-2"
+                        d="M17,10V2H31v8"
+                        fill="none"
+                        stroke-miterlimit="10"
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+              </div>
             </div>
-
-            <div class="input-group">
-              <label for="Department">Department</label>
-              <input type="text" placeholder="Department" name="department" value="<%= department %>" />
-              <p class="text5">Enter your Department</p>
+            <div class="goal-note">
+              <p><%= item.description %></p>
             </div>
-
-            <div class="input-group">
-              <label for="Level">Level</label>
-              <input class="inp3" type="text" placeholder="Level" name="level" value="<%= level %>" />
-              <p class="text5">Enter your current Level</p>
-            </div>
-
-            <div class="input-group">
-              <label for="Semester">Semester</label>
-              <input
-                class="inp4"
-                type="text"
-                placeholder="Semester"
-                name="semester"
-                value="<%= semester %>"
-              />
-              <p class="text5">Enter your current Semester</p>
-            </div>
-
-            <button type="submit" class="btn3">Update user Details</button>
-          </form>
+            <button class="make-priority">Move to Top</button>
+          </div>
+          <% }); %>
         </div>
       </main>
+      <% } else { %>
+      <p class="no-schedule">You don't have an active schedule!</p>
+      <% } %>
     </section>
   </body>
 </html>

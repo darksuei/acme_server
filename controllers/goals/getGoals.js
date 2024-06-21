@@ -7,9 +7,9 @@ const getGoals = async (req, res) => {
 
     const goals = await Goal.find({ userId });
 
-    res.status(httpStatus.OK).json(goals);
+    return res.status(httpStatus.OK).json(goals);
   } catch (error) {
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 

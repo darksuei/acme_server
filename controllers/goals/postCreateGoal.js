@@ -1,22 +1,26 @@
-const httpStatus = require("http-status");
 const Goal = require("../../models/goal");
+const scheduleEDF = require("../../services/edf");
 
 const postCreateGoal = async (req, res) => {
   try {
-    const { title, description, dueDate } = req.body;
-    console.log(req.body);
+    const { title, description, dueDate, priority } = req.body;
     const userId = req.user._id;
-    const newGoal = await Goal.create({
+
+    await Goal.create({
       title,
       description,
       dueDate,
       userId,
+      priority,
     });
 
-    // res.status(httpStatus.CREATED).json(newGoal);
+    const goals = await Goal.find({ userId });
+
+    const updatedGoals = scheduleEDF(goals);
+
     return res.redirect("/dashboard");
   } catch (error) {
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    return res.redirect("/dashboard");
   }
 };
 

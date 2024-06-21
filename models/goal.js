@@ -16,6 +16,14 @@ const goalSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    priority: {
+      type: String,
+      enum: ["low", "medium", "high"],
+      default: "medium",
+    },
+    edfIndex: {
+      type: Number,
+    },
     isCompleted: {
       type: Boolean,
       default: false,

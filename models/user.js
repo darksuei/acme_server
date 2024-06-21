@@ -23,6 +23,10 @@ const userSchema = new Schema(
     semester: {
       type: String,
     },
+    hasSchedule: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
