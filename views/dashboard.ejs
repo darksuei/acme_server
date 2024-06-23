@@ -27,7 +27,7 @@
             center: 'title',
             right: 'dayGridMonth,timeGridDay'
           },
-          events: events,
+          // events: events,
           editable: true
         });
         calendar.render();
@@ -186,7 +186,10 @@
                 </svg>
                 New Task
               </button>
-              <button class="btn1" onclick="generateSchedule()">Generate Schedule</button>
+              <!-- <button class="btn1" onclick="generateSchedule()">Create a Schedule</button> -->
+              <button class="btn1" onclick="window.location.href = '/new-schedule'">
+                <%= user.hasSchedule === true ? 'Regenerate Schedule' : 'Create a Schedule' %>
+              </button>
             </div>
           </div>
 
@@ -208,19 +211,22 @@
               <span id="closeEditGoal" class="close">&times;</span>
               <h1 class="text5">Edit Goal</h1>
               <div class="goal-container">
-                <form class="goal-input" method="post" action="/api/goal/create-goal">
+                <form class="goal-input" id="editGoalInput" method="post">
                   <div class="input-group">
                     <label for="title">Title</label>
                     <input type="text" id="goalTitle" placeholder="Title" name="title" />
                   </div>
+
                   <div class="input-group">
                     <label for="description">Description</label>
                     <input type="text" id="goalNote" placeholder="Description" name="description" />
                   </div>
+
                   <div class="input-group">
                     <label for="dueDate">Due Date</label>
-                    <input type="date" id="goalNote" placeholder="Due Date" name="dueDate" />
+                    <input type="date" id="goalDate" placeholder="Due Date" name="dueDate" />
                   </div>
+
                   <div class="input-group">
                     <label for="priority">Priority</label>
                     <select name="priority" id="priority">
@@ -273,10 +279,8 @@
               <% tasks.forEach(function(item) { %>
               <li class="<%= item.isCompleted ? 'crust' : '' %>">
                 <div class="item-text-wrapper">
-                  <input
-                    type="checkbox"
-                    onclick="toggleTaskStatus('<%= item._id %>', '<%= item.isCompleted %>')"
-                  />
+                  <input type="checkbox" <%= item.isCompleted ? "checked" : '' %>
+                  onclick="toggleTaskStatus('<%= item._id %>', '<%= item.isCompleted %>')" />
                   <span class="item-text"><%= item.title %></span>
                   <span class="item-text-sm"><%= item.created %></span>
                 </div>
@@ -345,7 +349,7 @@
                 </div>
 
                 <div class="icons">
-                  <!-- <p id="editGoal">Edit</p> -->
+                  <p id="editGoal" onclick="openEditGoalModal('<%= item._id %>')">Edit</p>
                   <button class="delete-btn" onclick="deleteGoal('<%= item._id %>')">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 48 48">
                       <title>trash can</title>

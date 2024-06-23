@@ -24,6 +24,20 @@ function deleteGoal(goalId) {
     });
 }
 
+function patchPriority(goalId) {
+  console.log("sent");
+  fetch(`/api/schedule/update-schedule-priority/${String(goalId)}`, {
+    method: "PATCH",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
 function toggleTaskStatus(taskId, isCompleted) {
   fetch(`/api/task/update-task/${taskId}`, {
     method: "PATCH",

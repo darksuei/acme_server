@@ -24,7 +24,15 @@ const goalSchema = new Schema(
     edfIndex: {
       type: Number,
     },
+    userDefinedPriority: {
+      type: Boolean,
+      default: false,
+    },
     isCompleted: {
+      type: Boolean,
+      default: false,
+    },
+    hasSentDeadlineEmail: {
       type: Boolean,
       default: false,
     },

@@ -14,18 +14,26 @@ const userSchema = new Schema(
     fullName: {
       type: String,
     },
-    department: {
+    phone: {
       type: String,
     },
-    level: {
+    occupation: {
       type: String,
     },
-    semester: {
+    interests: {
       type: String,
     },
     hasSchedule: {
       type: Boolean,
       default: false,
+    },
+    notifications: {
+      type: Boolean,
+      default: true,
+    },
+    darkMode: {
+      type: Boolean,
+      default: true,
     },
   },
   {

@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const scheduleEDF = require("../../services/edf");
 const Goal = require("../../models/goal");
+const { sendNewScheduleEmail } = require("../../services/novu");
 
 const postGenerateSchedule = async (req, res) => {
   try {
@@ -15,9 +16,17 @@ const postGenerateSchedule = async (req, res) => {
 
     await user.save();
 
-    res.status(httpStatus.OK).json(schedule);
+    if (user.notifications === true) {
+      await sendNewScheduleEmail({
+        id: String(user._id),
+        email: user.email,
+        goalsCount: goals.length,
+      });
+    }
+
+    return res.status(httpStatus.OK).json(schedule);
   } catch (error) {
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 

@@ -11,10 +11,14 @@ const goalRouter = require("./routes/goalRoutes");
 const taskRouter = require("./routes/taskRoutes");
 const scheduleRouter = require("./routes/scheduleRoutes");
 const moment = require("moment");
+const cron = require("node-cron");
 
 const Task = require("./models/task");
 const Goal = require("./models/goal");
+const User = require("./models/user");
 const authenticateClient = require("./middlewares/authenticateClient");
+const { sendTaskDeadlineEmail } = require("./services/novu");
+const renderDashboardElements = require("./utils");
 
 // Services
 require("./services/passport");
@@ -65,17 +69,19 @@ app.get("/signup", (_req, res) => {
   return res.render("signup");
 });
 
-// Todo: Require login on dashboard
-
 app.get("/dashboard", authenticateClient, async (req, res) => {
-  const tasks = await Task.find({ userId: req.user._id });
-  const goals = await Goal.find({ userId: req.user._id });
-  const currentDate = moment().format("dddd, Do MMMM");
+  const dashboardElements = await renderDashboardElements(req.user);
 
-  tasks.map((task) => {
-    task.created = moment(task.createdAt).fromNow();
-    return task;
-  });
+  return res.render("dashboard", dashboardElements);
+});
+
+app.get("/settings", authenticateClient, (req, res) => {
+  const user = req.user;
+  return res.render("settings", user);
+});
+
+app.get("/new-schedule", authenticateClient, async (req, res) => {
+  const goals = await Goal.find({ userId: req.user._id });
 
   goals.map((goal) => {
     goal.created = moment(goal.createdAt).fromNow();
@@ -83,16 +89,10 @@ app.get("/dashboard", authenticateClient, async (req, res) => {
     return goal;
   });
 
-  return res.render("dashboard", {
-    tasks,
-    goals,
-    currentDate,
+  return res.render("newSchedule", {
+    goals: goals.sort((a, b) => a.edfIndex - b.edfIndex),
+    hasSchedule: req.user.hasSchedule,
   });
-});
-
-app.get("/settings", authenticateClient, (req, res) => {
-  const user = req.user;
-  return res.render("settings", user);
 });
 
 app.get("/schedule", authenticateClient, async (req, res) => {
@@ -118,6 +118,39 @@ app.get("/health", (_req, res) => {
 // Handle Undefined Routes
 app.use((_req, res) => {
   return res.status(httpStatus.NOT_FOUND).json({ message: "Route not found" });
+});
+
+//Cron Job to send email when a goal deadline has almost been reached (< 4 hours).
+cron.schedule("0 * * * *", async () => {
+  const now = new Date();
+  const tomorrow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
+
+  const goals = await Goal.find({
+    dueDate: {
+      $gte: now,
+      $lte: tomorrow,
+    },
+    hasSentDeadlineEmail: false,
+  });
+
+  goals.map(async (goal) => {
+    const user = await User.findById(goal.userId);
+
+    if (user.notifications === false) {
+      return;
+    }
+
+    console.log(`Sending task deadline email to ${user.email} for goal ${goal.title}`);
+
+    await sendTaskDeadlineEmail({
+      id: user._id,
+      email: user.email,
+      taskName: goal.title,
+    });
+
+    goal.hasSentDeadlineEmail = true;
+    await goal.save();
+  });
 });
 
 // Server Bootstrap

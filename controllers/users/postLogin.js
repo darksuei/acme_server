@@ -1,11 +1,26 @@
-const postLogin = async (req, res) => {
+const passport = require("passport");
+
+const postLogin = async (req, res, next) => {
   try {
-    console.log(`${req.user.email} logged in successfully`);
-    return res.redirect("/dashboard");
+    passport.authenticate("local", (err, user, info) => {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        // Authentication failed, redirect to login with an error message
+        return res.redirect("/login?error=" + encodeURIComponent(info.message));
+      }
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        // Authentication successful, redirect to the desired page
+        return res.redirect("/dashboard");
+      });
+    })(req, res, next);
   } catch (error) {
-    return res.render(path.join(__dirname, "..", "..", "views", "signup"), {
-      error: "An error occurred. Please try again.",
-    });
+    console.log(error);
+    return res.redirect("/login?error=Login failed.");
   }
 };
 

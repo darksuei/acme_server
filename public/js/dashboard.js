@@ -1,5 +1,34 @@
 const notyf = new Notyf();
 
+function openEditGoalModal(id) {
+  localStorage.setItem("activeGoalId", id);
+  console.log(id, localStorage.getItem("activeGoalId"));
+
+  const closeEditGoal = document.getElementById("closeEditGoal");
+  const editGoalPopup = document.getElementById("editGoalPopup");
+
+  editGoalPopup.style.display = "block";
+
+  closeEditGoal.addEventListener("click", () => {
+    editGoalPopup.style.display = "none";
+  });
+
+  fetch(`/api/goal/get-goal/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      document.getElementById("goalTitle").value = data.title;
+      document.getElementById("goalNote").value = data.description;
+      document.getElementById("goalDate").value = new Date(data.dueDate).toISOString().split("T")[0];
+      document.getElementById("priority").value = data.priority;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  document.getElementById("editGoalInput").action = `/api/schedule/update-schedule/${id}`;
+}
+
 document.addEventListener("DOMContentLoaded", (event) => {
   const openTaskPopupBtn = document.getElementById("openTaskPopupBtn");
   const closeTaskPopupBtn = document.getElementById("closeTaskPopupBtn");
@@ -9,8 +38,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
   const closeGoalPopupBtn = document.getElementById("closeGoalPopupBtn");
   const goalPopup = document.getElementById("goalPopup");
 
-  const editGoal = document.getElementById("editGoal");
-  const closeEditGoal = document.getElementById("closeEditGoal");
   const editGoalPopup = document.getElementById("editGoalPopup");
 
   openTaskPopupBtn.addEventListener("click", () => {
@@ -29,14 +56,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     goalPopup.style.display = "none";
   });
 
-  editGoal.addEventListener("click", () => {
-    editGoalPopup.style.display = "block";
-  });
-
-  closeEditGoal.addEventListener("click", () => {
-    editGoalPopup.style.display = "none";
-  });
-
   window.addEventListener("click", (event) => {
     if (event.target == taskPopup) {
       taskPopup.style.display = "none";
@@ -44,6 +63,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     if (event.target == goalPopup) {
       goalPopup.style.display = "none";
+    }
+
+    if (event.target == editGoalPopup) {
+      editGoalPopup.style.display = "none";
     }
   });
 });

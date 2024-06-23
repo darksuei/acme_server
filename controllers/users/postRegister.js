@@ -1,6 +1,7 @@
 const User = require("../../models/user");
 const bcrypt = require("bcrypt");
 const path = require("path");
+const { createNotificationSubscriber } = require("../../services/novu");
 
 const postRegister = async (req, res) => {
   try {
@@ -20,9 +21,14 @@ const postRegister = async (req, res) => {
 
     const passwordHash = await bcrypt.hash(password, 10);
 
-    const user = new User({ email, password: passwordHash });
+    let user = new User({ email, password: passwordHash });
 
-    await user.save();
+    user = await user.save();
+
+    await createNotificationSubscriber({
+      id: String(user._id),
+      email,
+    });
 
     console.log(`${email} signed up successfully`);
 
