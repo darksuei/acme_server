@@ -270,9 +270,11 @@
       
       if (queryParams.error) {
         notyf.error(queryParams.error);
+        window.history.replaceState({}, document.title, "/settings");
       }
       if (queryParams.success) {
         notyf.success(queryParams.success);
+        window.history.replaceState({}, document.title, "/settings");
       }
     </script>
   </body>

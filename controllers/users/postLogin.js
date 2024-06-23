@@ -15,7 +15,7 @@ const postLogin = async (req, res, next) => {
           return next(err);
         }
         // Authentication successful, redirect to the desired page
-        return res.redirect("/dashboard");
+        return res.redirect("/dashboard?login=true");
       });
     })(req, res, next);
   } catch (error) {

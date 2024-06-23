@@ -16,11 +16,11 @@ const postCreateGoal = async (req, res) => {
 
     const goals = await Goal.find({ userId });
 
-    const updatedGoals = scheduleEDF(goals);
+    scheduleEDF(goals);
 
-    return res.redirect("/dashboard");
+    return res.redirect("/dashboard?success=Goal created successfully.");
   } catch (error) {
-    return res.redirect("/dashboard");
+    return res.redirect("/dashboard?error=Failed to create goal.");
   }
 };
 

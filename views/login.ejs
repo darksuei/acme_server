@@ -86,9 +86,11 @@
 
     if (queryParams.error) {
       notyf.error(queryParams.error);
+      window.history.replaceState({}, document.title, "/login");
     }
     if (queryParams.success) {
       notyf.success(queryParams.success);
+      window.history.replaceState({}, document.title, "/login");
     }
   </script>
 </html>

@@ -5,7 +5,7 @@ const patchGoal = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const { title, description, status, isCompleted } = req.body;
+    const { title, description, status, isCompleted, dueDate, priority } = req.body;
 
     const goal = await Goal.findById(id);
 
@@ -14,16 +14,17 @@ const patchGoal = async (req, res) => {
     if (String(goal.userId) !== String(req.user._id))
       return res.status(httpStatus.UNAUTHORIZED).json({ message: "User unauthorized" });
 
-    goal.title = title || goal.title;
-    goal.description = description || goal.description;
-    goal.status = status || goal.status;
+    goal.title = title ?? goal.title;
+    goal.description = description ?? goal.description;
     goal.isCompleted = isCompleted ?? goal.isCompleted;
+    goal.dueDate = dueDate ?? goal.dueDate;
+    goal.priority = priority ?? goal.priority;
 
-    const updatedGoal = await goal.save();
+    await goal.save();
 
-    return res.status(httpStatus.OK).json({ message: "Goal updated successfully", goal: updatedGoal });
+    return res.redirect("/dashboard?success=Success.");
   } catch (error) {
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    return res.redirect("/dashboard?error=Failed to update.");
   }
 };
 

@@ -186,8 +186,7 @@
                 </svg>
                 New Task
               </button>
-              <!-- <button class="btn1" onclick="generateSchedule()">Create a Schedule</button> -->
-              <button class="btn1" onclick="window.location.href = '/new-schedule'">
+              <button class="btn1" onclick="generateSchedule('<%= user.hasSchedule %>')">
                 <%= user.hasSchedule === true ? 'Regenerate Schedule' : 'Create a Schedule' %>
               </button>
             </div>
@@ -396,5 +395,42 @@
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="/js/dashboard.js"></script>
     <script src="/js/api.js"></script>
+    <script>
+      function getQueryStringParams() {
+        const params = {};
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        if (urlParams.has("error")) {
+          params.error = urlParams.get("error");
+        }
+        if (urlParams.has("success")) {
+          params.success = urlParams.get("success");
+        }
+        if (urlParams.has("login")) {
+          params.login = urlParams.get("login");
+        }
+
+        return params;
+      }
+
+      // Get the query string parameters
+      const queryParams = getQueryStringParams();
+
+      console.log(queryParams);
+
+      if (queryParams.error) {
+        notyf.error(queryParams.error);
+        window.history.replaceState({}, document.title, "/dashboard");
+      }
+      if (queryParams.success) {
+        notyf.success(queryParams.success);
+        window.history.replaceState({}, document.title, "/dashboard");
+      }
+      if (queryParams.login) {
+        notyf.success("Log in success.");
+        window.history.replaceState({}, document.title, "/dashboard");
+      }
+    </script>
   </body>
 </html>

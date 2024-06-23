@@ -26,7 +26,7 @@ function openEditGoalModal(id) {
       console.log(err);
     });
 
-  document.getElementById("editGoalInput").action = `/api/schedule/update-schedule/${id}`;
+  document.getElementById("editGoalInput").action = `/api/goal/update-goal/${id}`;
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {

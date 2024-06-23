@@ -11,9 +11,9 @@ const postCreateTask = async (req, res) => {
 
     await task.save();
 
-    return res.redirect("/dashboard");
+    return res.redirect("/dashboard?success=Task created successfully.");
   } catch (error) {
-    return res.redirect("/dashboard");
+    return res.redirect("/dashboard?error=Failed to create task.");
   }
 };
 

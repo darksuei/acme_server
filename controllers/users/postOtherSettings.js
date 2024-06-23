@@ -7,10 +7,10 @@ const postOtherSettings = async (req, res) => {
 
     await user.save();
 
-    return res.redirect("/settings");
+    return res.redirect("/settings?success=Success.");
   } catch (error) {
     console.log(error);
-    return res.redirect("/settings?error=Failed to update user.");
+    return res.redirect("/settings?error=Failed.");
   }
 };
 

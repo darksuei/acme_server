@@ -4,17 +4,13 @@ const postUpdateUser = async (req, res) => {
 
     const { body } = req;
 
-    console.log(body);
-
     Object.keys(body).forEach((key) => {
       user[key] = body[key];
     });
 
-    console.log(user);
-
     await user.save();
 
-    return res.redirect("/settings");
+    return res.redirect("/settings?sucess=User updated successfully.");
   } catch (error) {
     return res.redirect("/settings?error=Failed to update user.");
   }

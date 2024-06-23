@@ -63,14 +63,16 @@ function convertToBoolean(value) {
   }
 }
 
-function generateSchedule() {
-  fetch("/api/schedule/create-schedule", {
-    method: "POST",
-  })
-    .then((response) => response.json())
-    .then((data) => {})
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-  notyf.success("Schedule generated successfully!");
+function generateSchedule(hasSchedule) {
+  if (convertToBoolean(hasSchedule) === false) {
+    fetch("/api/schedule/create-schedule", {
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then((data) => {})
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+  window.location.href = "/new-schedule";
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TaskMaster | Sign Up</title>
     <link rel="stylesheet" href="/css/auth.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css" />
   </head>
   <body>
     <main>
@@ -67,4 +68,35 @@
     </main>
   </body>
   <script src="/js/api.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+  <script>
+    const notyf = new Notyf();
+
+    function getQueryStringParams() {
+      const params = {};
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+
+      if (urlParams.has("error")) {
+        params.error = urlParams.get("error");
+      }
+      if (urlParams.has("success")) {
+        params.success = urlParams.get("success");
+      }
+
+      return params;
+    }
+
+    // Get the query string parameters
+    const queryParams = getQueryStringParams();
+
+    if (queryParams.error) {
+      notyf.error(queryParams.error);
+      window.history.replaceState({}, document.title, "/signup");
+    }
+    if (queryParams.success) {
+      notyf.success(queryParams.success);
+      window.history.replaceState({}, document.title, "/signup");
+    }
+  </script>
 </html>
