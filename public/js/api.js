@@ -25,7 +25,6 @@ function deleteGoal(goalId) {
 }
 
 function patchPriority(goalId) {
-  console.log("sent");
   fetch(`/api/schedule/update-schedule-priority/${String(goalId)}`, {
     method: "PATCH",
   })

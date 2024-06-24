@@ -5,7 +5,6 @@ const { sendNewScheduleEmail } = require("../../services/novu");
 
 const postGenerateSchedule = async (req, res) => {
   try {
-    console.log("hit");
     const user = req.user;
     const userId = user._id;
 

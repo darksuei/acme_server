@@ -1,0 +1,107 @@
+.hamburger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+    padding: 0;
+  }
+
+  header {
+    width: 100vw !important;
+    padding-inline: 1.5em;
+  }
+
+  nav,
+  .header2 {
+    display: none;
+    position: fixed;
+    background-color: white;
+    z-index: 99999999999;
+    gap: 1em;
+  }
+
+  nav.active,
+  .header2.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+    position: absolute;
+    top: 1em;
+    left: 0;
+    padding: 1em;
+    cursor: pointer;
+    z-index: 99999999999;
+  }
+  main,
+  .content-header,
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  main {
+    justify-content: center;
+    align-items: center;
+    padding-inline: 0;
+  }
+
+  .content {
+    gap: 1em;
+    width: 90%;
+  }
+
+  .content-header {
+    gap: 1.25em;
+    width: 100%;
+  }
+  .checkbook-container {
+    width: 90%;
+  }
+  .goal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .goals-header {
+    justify-content: space-between;
+    width: 95%;
+  }
+  .btn-group {
+    width: 94%;
+    justify-content: space-between;
+  }
+
+  .settings-main {
+    width: 90%;
+    margin-inline: auto;
+    align-items: flex-start;
+    margin-bottom: 5em;
+  }
+
+  .main-content.settings-main-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-group > input {
+    width: 250px;
+  }
+
+  .new-schedule-main-content {
+    width: 90%;
+    margin-inline: auto;
+    align-items: flex-start;
+    margin-block: 2em;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-inline: 1.5em;
+    box-sizing: border-box;
+  }
+
+  .new-schedule-main-content .icons {
+    width: 100%;
+  }
+}

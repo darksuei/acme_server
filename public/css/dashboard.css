@@ -1,4 +1,5 @@
-body {
+body,
+html {
   overflow-x: hidden;
   width: 100vw;
   padding: 0;
@@ -171,7 +172,7 @@ main {
 .checkbook-container {
   border: 1px solid #c9c9c9;
   padding: 20px;
-  width: 600px;
+  width: 60%;
   height: 300px;
   border-bottom-left-radius: 10px;
 }
@@ -409,4 +410,20 @@ input {
 .a-unstyled {
   text-decoration: none;
   color: black;
+}
+
+.checkbook-container-header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-block: 2em;
+}
+
+.checkbook-container-header > .sub-texts {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }

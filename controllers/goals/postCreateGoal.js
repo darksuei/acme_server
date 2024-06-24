@@ -18,9 +18,9 @@ const postCreateGoal = async (req, res) => {
 
     scheduleEDF(goals);
 
-    return res.redirect("/dashboard?success=Goal created successfully.");
+    return res.redirect("/dashboard?success=Success.");
   } catch (error) {
-    return res.redirect("/dashboard?error=Failed to create goal.");
+    return res.redirect("/dashboard?error=Failed.");
   }
 };
 

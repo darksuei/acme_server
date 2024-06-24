@@ -2,7 +2,6 @@ const notyf = new Notyf();
 
 function openEditGoalModal(id) {
   localStorage.setItem("activeGoalId", id);
-  console.log(id, localStorage.getItem("activeGoalId"));
 
   const closeEditGoal = document.getElementById("closeEditGoal");
   const editGoalPopup = document.getElementById("editGoalPopup");
@@ -16,7 +15,6 @@ function openEditGoalModal(id) {
   fetch(`/api/goal/get-goal/${id}`)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       document.getElementById("goalTitle").value = data.title;
       document.getElementById("goalNote").value = data.description;
       document.getElementById("goalDate").value = new Date(data.dueDate).toISOString().split("T")[0];

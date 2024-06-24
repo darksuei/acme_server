@@ -5,7 +5,7 @@ const patchGoal = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const { title, description, status, isCompleted, dueDate, priority } = req.body;
+    const { title, description, isCompleted, dueDate, priority } = req.body;
 
     const goal = await Goal.findById(id);
 
@@ -24,7 +24,7 @@ const patchGoal = async (req, res) => {
 
     return res.redirect("/dashboard?success=Success.");
   } catch (error) {
-    return res.redirect("/dashboard?error=Failed to update.");
+    return res.redirect("/dashboard?error=Failed.");
   }
 };
 
