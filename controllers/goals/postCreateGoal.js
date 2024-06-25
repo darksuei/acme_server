@@ -3,12 +3,14 @@ const scheduleEDF = require("../../services/edf");
 
 const postCreateGoal = async (req, res) => {
   try {
-    const { title, description, dueDate, priority } = req.body;
+    const { title, description, dueDate, priority, startDate } = req.body;
+
     const userId = req.user._id;
 
     await Goal.create({
       title,
       description,
+      startDate,
       dueDate,
       userId,
       priority,

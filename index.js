@@ -13,12 +13,12 @@ const scheduleRouter = require("./routes/scheduleRoutes");
 const moment = require("moment");
 const cron = require("node-cron");
 
-const Task = require("./models/task");
 const Goal = require("./models/goal");
 const User = require("./models/user");
 const authenticateClient = require("./middlewares/authenticateClient");
 const { sendTaskDeadlineEmail } = require("./services/novu");
 const renderDashboardElements = require("./utils");
+const scheduleEDF = require("./services/edf");
 
 // Services
 require("./services/passport");
@@ -81,7 +81,9 @@ app.get("/settings", authenticateClient, (req, res) => {
 });
 
 app.get("/new-schedule", authenticateClient, async (req, res) => {
-  const goals = await Goal.find({ userId: req.user._id });
+  const goals = await Goal.find({ userId: req.user._id, dueDate: { $gt: new Date() } });
+
+  scheduleEDF(goals);
 
   goals.map((goal) => {
     goal.created = moment(goal.createdAt).fromNow();
@@ -92,11 +94,12 @@ app.get("/new-schedule", authenticateClient, async (req, res) => {
   return res.render("newSchedule", {
     goals: goals.sort((a, b) => a.edfIndex - b.edfIndex),
     hasSchedule: req.user.hasSchedule,
+    user: req.user,
   });
 });
 
 app.get("/schedule", authenticateClient, async (req, res) => {
-  const goals = await Goal.find({ userId: req.user._id });
+  const goals = await Goal.find({ userId: req.user._id, dueDate: { $gt: new Date() } });
 
   goals.map((goal) => {
     goal.created = moment(goal.createdAt).fromNow();
@@ -107,6 +110,16 @@ app.get("/schedule", authenticateClient, async (req, res) => {
   return res.render("schedule", {
     goals: goals.sort((a, b) => a.edfIndex - b.edfIndex),
     hasSchedule: req.user.hasSchedule,
+    user: req.user,
+  });
+});
+
+app.get("/logout", (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/login");
   });
 });
 

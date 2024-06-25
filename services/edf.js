@@ -1,17 +1,15 @@
 const scheduleEDF = (goals, startIndex = 0) => {
-  if (!Array.isArray(goals)) {
-    throw new Error("Input must be an array of objects.");
-  }
+  if (!Array.isArray(goals)) throw new Error("Input must be an array of objects.");
 
   const priorityOrder = {
-    High: 1,
-    Medium: 2,
-    Low: 3,
+    high: 1,
+    medium: 2,
+    low: 3,
   };
 
   goals.sort((a, b) => {
-    if (a.dueDate - b.dueDate !== 0) {
-      return a.dueDate - b.dueDate;
+    if (a.dueDate.getTime() - b.dueDate.getTime() !== 0) {
+      return a.dueDate.getTime() - b.dueDate.getTime();
     }
     return priorityOrder[a.priority] - priorityOrder[b.priority];
   });

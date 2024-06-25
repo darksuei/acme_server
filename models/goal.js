@@ -9,6 +9,9 @@ const goalSchema = new Schema(
     description: {
       type: String,
     },
+    startDate: {
+      type: Date,
+    },
     dueDate: {
       type: Date,
     },

@@ -28,14 +28,21 @@ section {
 }
 
 nav {
+  box-sizing: border-box;
   width: 300px;
   height: calc(100vh - 80px);
   background: #fafbfdb7;
   border: 1px solid #c9c9c9;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   padding-block: 1em;
+}
+
+.nav-main {
+  display: flex;
+  flex-direction: column;
   gap: 0.75em;
 }
 
@@ -53,17 +60,38 @@ nav {
   justify-content: center;
   gap: 0.6em;
   padding: 1em;
-}
-h4 {
-  margin: 0;
-}
-.dashboard {
   color: black;
   text-decoration: none;
 }
+
+.logout {
+  color: red;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 16px;
+  width: 250px;
+  border-radius: 10px;
+  cursor: pointer !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 1em;
+}
+
+.red {
+  color: #e22323;
+}
+
+h4 {
+  margin: 0;
+}
+
 .settings {
   background: #8b8b8b;
 }
+
 .settings:hover,
 .dashboard:hover {
   background: #b9b9b944;
@@ -193,4 +221,12 @@ label {
 
 .input-group-row > input {
   cursor: pointer;
+}
+
+.username {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75em;
 }

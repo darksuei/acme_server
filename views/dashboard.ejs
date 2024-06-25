@@ -38,29 +38,32 @@
   <body>
     <header>
       <a href="/"><img src="/img/LogoSample_ByTailorBrands-removebg-preview.png" alt="" class="logo" /></a>
-      <a href="/settings">
-        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 16 16">
-          <title>profile</title>
-          <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
-            <circle
-              data-color="color-2"
-              cx="8"
-              cy="3.5"
-              r="3"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></circle>
-            <path
-              d="M8,9a6.5,6.5,0,0,0-6.5,6.5h13A6.5,6.5,0,0,0,8,9Z"
-              fill="none"
-              stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </g>
-        </svg>
-      </a>
+      <div class="username">
+        <h4><%= user.fullName %></h4>
+        <a href="/settings">
+          <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 16 16">
+            <title>profile</title>
+            <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
+              <circle
+                data-color="color-2"
+                cx="8"
+                cy="3.5"
+                r="3"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></circle>
+              <path
+                d="M8,9a6.5,6.5,0,0,0-6.5,6.5h13A6.5,6.5,0,0,0,8,9Z"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </g>
+          </svg>
+        </a>
+      </div>
     </header>
 
     <section>
@@ -79,336 +82,402 @@
       </svg>
 
       <nav class="header2">
-        <a href="/dashboard" class="dashboard">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24">
-            <title>home 3</title>
-            <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
-              <polyline
-                data-cap="butt"
-                points="10 23 10 17 14 17 14 23"
-                fill="none"
-                stroke="#000000"
-                stroke-miterlimit="10"
-              ></polyline>
-              <polyline
-                data-cap="butt"
-                data-color="color-2"
-                points="1 11 12 2 23 11"
-                fill="none"
-                stroke="inherit"
-                stroke-miterlimit="10"
-              ></polyline>
-              <line
-                data-cap="butt"
-                data-color="color-2"
-                x1="4"
-                y1="8.545"
-                x2="4"
-                y2="4"
-                fill="none"
-                stroke="inherit"
-                stroke-miterlimit="10"
-              ></line>
-              <polyline
-                points="4 13 4 23 20 23 20 13"
-                fill="none"
-                stroke="#000000"
-                stroke-linecap="square"
-                stroke-miterlimit="10"
-              ></polyline>
-              <rect data-stroke="none" x="11" y="11" width="2" height="2" fill="#000000" stroke="none"></rect>
-              <rect
-                x="11"
-                y="11"
-                width="2"
-                height="2"
-                fill="none"
-                stroke="#000000"
-                stroke-linecap="square"
-                stroke-miterlimit="10"
-              ></rect>
-            </g>
-          </svg>
-          <h4 class="text2">Dashboard</h4>
-        </a>
+        <div class="nav-main">
+          <a href="/dashboard" class="dashboard">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24">
+              <title>home 3</title>
+              <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
+                <polyline
+                  data-cap="butt"
+                  points="10 23 10 17 14 17 14 23"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-miterlimit="10"
+                ></polyline>
+                <polyline
+                  data-cap="butt"
+                  data-color="color-2"
+                  points="1 11 12 2 23 11"
+                  fill="none"
+                  stroke="inherit"
+                  stroke-miterlimit="10"
+                ></polyline>
+                <line
+                  data-cap="butt"
+                  data-color="color-2"
+                  x1="4"
+                  y1="8.545"
+                  x2="4"
+                  y2="4"
+                  fill="none"
+                  stroke="inherit"
+                  stroke-miterlimit="10"
+                ></line>
+                <polyline
+                  points="4 13 4 23 20 23 20 13"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="square"
+                  stroke-miterlimit="10"
+                ></polyline>
+                <rect
+                  data-stroke="none"
+                  x="11"
+                  y="11"
+                  width="2"
+                  height="2"
+                  fill="#000000"
+                  stroke="none"
+                ></rect>
+                <rect
+                  x="11"
+                  y="11"
+                  width="2"
+                  height="2"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="square"
+                  stroke-miterlimit="10"
+                ></rect>
+              </g>
+            </svg>
+            <h4 class="text2">Dashboard</h4>
+          </a>
 
-        <a href="/schedule" class="settings">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 48 48">
-            <title>cogwheel</title>
-            <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
-              <circle
-                data-color="color-2"
-                cx="24"
-                cy="24"
-                r="7"
-                fill="none"
-                stroke-linecap="square"
-                stroke-miterlimit="10"
-              ></circle>
+          <a href="/schedule" class="settings">
+            <svg width="20" height="20" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <style>
+                  .a,
+                  .b {
+                    fill: none;
+                    stroke: #000000;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                  }
+                  .b {
+                    fill-rule: evenodd;
+                  }
+                </style>
+              </defs>
+              <line class="a" x1="11.1631" y1="20.972" x2="14.9131" y2="18.9095" />
+              <line class="a" x1="14.9131" y1="18.9095" x2="14.9131" y2="33.9095" />
+              <circle class="a" cx="23.5438" cy="23.9095" r="5" />
               <path
-                d="M46,27V21L39.6,20.466a15.89,15.89,0,0,0-2.072-4.991l4.155-4.91L37.435,6.322l-4.91,4.155A15.876,15.876,0,0,0,27.534,8.4L27,2H21l-.534,6.4a15.89,15.89,0,0,0-4.991,2.072l-4.91-4.155L6.322,10.565l4.155,4.91A15.876,15.876,0,0,0,8.4,20.466L2,21v6l6.4.534a15.89,15.89,0,0,0,2.072,4.991l-4.155,4.91,4.243,4.243,4.91-4.155A15.876,15.876,0,0,0,20.466,39.6L21,46h6l.534-6.405a15.89,15.89,0,0,0,4.991-2.072l4.91,4.155,4.243-4.243-4.155-4.91A15.876,15.876,0,0,0,39.6,27.534Z"
+                class="a"
+                d="M19.0994,32.0576A4.5482,4.5482,0,0,0,23.1735,33.91h.37a4.9792,4.9792,0,0,0,5-5v-5"
+              />
+              <path
+                class="b"
+                d="M43.5,25.7931V11.8621a4,4,0,0,0-4-4H8.5a4,4,0,0,0-4,4V36.1379a4,4,0,0,0,4,4"
+              />
+              <path
+                class="b"
+                d="M43.5,36.1379V11.8621a4,4,0,0,0-4-4H8.5a4,4,0,0,0-4,4V36.1379a4,4,0,0,0,4,4h31A4,4,0,0,0,43.5,36.1379Z"
+              />
+              <path class="b" d="M35.2069,40.1379V15.819a3.1379,3.1379,0,0,0-3.1379-3.138H4.5" />
+            </svg>
+            <h4 class="text1">Calender View</h4>
+          </a>
+
+          <a href="/settings" class="settings">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 48 48">
+              <title>cogwheel</title>
+              <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
+                <circle
+                  data-color="color-2"
+                  cx="24"
+                  cy="24"
+                  r="7"
+                  fill="none"
+                  stroke-linecap="square"
+                  stroke-miterlimit="10"
+                ></circle>
+                <path
+                  d="M46,27V21L39.6,20.466a15.89,15.89,0,0,0-2.072-4.991l4.155-4.91L37.435,6.322l-4.91,4.155A15.876,15.876,0,0,0,27.534,8.4L27,2H21l-.534,6.4a15.89,15.89,0,0,0-4.991,2.072l-4.91-4.155L6.322,10.565l4.155,4.91A15.876,15.876,0,0,0,8.4,20.466L2,21v6l6.4.534a15.89,15.89,0,0,0,2.072,4.991l-4.155,4.91,4.243,4.243,4.91-4.155A15.876,15.876,0,0,0,20.466,39.6L21,46h6l.534-6.405a15.89,15.89,0,0,0,4.991-2.072l4.91,4.155,4.243-4.243-4.155-4.91A15.876,15.876,0,0,0,39.6,27.534Z"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="square"
+                  stroke-miterlimit="10"
+                ></path>
+              </g>
+            </svg>
+            <h4 class="text1">Settings</h4>
+          </a>
+        </div>
+
+        <a href="/logout" class="logout">
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24" class="red">
+            <title>logout</title>
+            <g stroke-width="1" fill="#000000" stroke="#e22323" class="nc-icon-wrapper">
+              <path
+                d="M12,2A10,10,0,1,0,22,12,10.011,10.011,0,0,0,12,2Zm4,14H10V16h6Zm-2-8.5V14h-6v-6.5Z"
                 fill="none"
-                stroke="#000000"
-                stroke-linecap="square"
-                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               ></path>
             </g>
           </svg>
-          <h4 class="text1">Schedule</h4>
-        </a>
-
-        <a href="/settings" class="settings">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 48 48">
-            <title>cogwheel</title>
-            <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
-              <circle
-                data-color="color-2"
-                cx="24"
-                cy="24"
-                r="7"
-                fill="none"
-                stroke-linecap="square"
-                stroke-miterlimit="10"
-              ></circle>
-              <path
-                d="M46,27V21L39.6,20.466a15.89,15.89,0,0,0-2.072-4.991l4.155-4.91L37.435,6.322l-4.91,4.155A15.876,15.876,0,0,0,27.534,8.4L27,2H21l-.534,6.4a15.89,15.89,0,0,0-4.991,2.072l-4.91-4.155L6.322,10.565l4.155,4.91A15.876,15.876,0,0,0,8.4,20.466L2,21v6l6.4.534a15.89,15.89,0,0,0,2.072,4.991l-4.155,4.91,4.243,4.243,4.91-4.155A15.876,15.876,0,0,0,20.466,39.6L21,46h6l.534-6.405a15.89,15.89,0,0,0,4.991-2.072l4.91,4.155,4.243-4.243-4.155-4.91A15.876,15.876,0,0,0,39.6,27.534Z"
-                fill="none"
-                stroke="#000000"
-                stroke-linecap="square"
-                stroke-miterlimit="10"
-              ></path>
-            </g>
-          </svg>
-          <h4 class="text1">Settings</h4>
+          <h4 class="text1">Logout</h4>
         </a>
       </nav>
 
       <main>
-        <div class="content">
-          <div class="content-header">
-            <div class="content-header-texts">
-              <h1 class="text3"><%= currentDate %></h1>
+        <div class="main-content">
+          <div class="content">
+            <div class="content-header">
+              <div class="content-header-texts">
+                <h1 class="text3"><%= currentDate %></h1>
+              </div>
+
+              <div class="btn-group">
+                <button class="btn1" onclick="generateSchedule('<%= user.hasSchedule %>')">
+                  <%= user.hasSchedule === true ? 'Regenerate Schedule' : 'Create a Schedule' %>
+                </button>
+              </div>
             </div>
 
-            <div class="btn-group">
-              <button class="btn1" onclick="generateSchedule('<%= user.hasSchedule %>')">
-                <%= user.hasSchedule === true ? 'Regenerate Schedule' : 'Create a Schedule' %>
-              </button>
-            </div>
-          </div>
-
-          <div id="taskPopup" class="popup">
-            <div class="popup-content">
-              <span id="closeTaskPopupBtn" class="close">&times;</span>
-              <h1 class="text5">New Goal</h1>
-              <form method="post" action="/api/task/create-task">
-                <div class="input-group">
-                  <input type="text" class="new-item-input" name="title" required placeholder="Title" />
-                </div>
-                <button type="submit" id="add-button" class="task-button">Continue</button>
-              </form>
-            </div>
-          </div>
-
-          <div id="editGoalPopup" class="popup">
-            <div class="popup-content">
-              <span id="closeEditGoal" class="close">&times;</span>
-              <h1 class="text5">Edit Task</h1>
-              <div class="goal-container">
-                <form class="goal-input" id="editGoalInput" method="post">
+            <div id="taskPopup" class="popup">
+              <div class="popup-content">
+                <span id="closeTaskPopupBtn" class="close">&times;</span>
+                <h1 class="text5">New Goal</h1>
+                <form method="post" action="/api/task/create-task">
                   <div class="input-group">
-                    <label for="title">Title</label>
-                    <input type="text" id="goalTitle" placeholder="Title" name="title" />
+                    <input type="text" class="new-item-input" name="title" required placeholder="Title" />
                   </div>
-
-                  <div class="input-group">
-                    <label for="description">Description</label>
-                    <input type="text" id="goalNote" placeholder="Description" name="description" />
-                  </div>
-
-                  <div class="input-group">
-                    <label for="dueDate">Due Date</label>
-                    <input type="date" id="goalDate" placeholder="Due Date" name="dueDate" />
-                  </div>
-
-                  <div class="input-group">
-                    <label for="priority">Priority</label>
-                    <select name="priority" id="priority">
-                      <option value="low">Low</option>
-                      <option value="medium">Medium</option>
-                      <option value="high">High</option>
-                    </select>
-                  </div>
-                  <button type="submit">Continue</button>
+                  <button type="submit" id="add-button" class="task-button">Continue</button>
                 </form>
               </div>
             </div>
-          </div>
 
-          <div id="goalPopup" class="popup">
-            <div class="popup-content">
-              <span id="closeGoalPopupBtn" class="close">&times;</span>
-              <h1 class="text5">New Task</h1>
+            <div id="editGoalPopup" class="popup">
+              <div class="popup-content">
+                <span id="closeEditGoal" class="close">&times;</span>
+                <h1 class="text5">Edit Task</h1>
+                <div class="goal-container">
+                  <form class="goal-input" id="editGoalInput" method="post">
+                    <div class="input-group">
+                      <label for="title">Title</label>
+                      <input type="text" id="goalTitle" placeholder="Title" name="title" />
+                    </div>
 
-              <div class="goal-container">
-                <form class="goal-input" method="post" action="/api/goal/create-goal">
-                  <div class="input-group">
-                    <label for="title">Title</label>
-                    <input type="text" id="goalTitle" placeholder="Title" name="title" />
-                  </div>
-                  <div class="input-group">
-                    <label for="description">Description</label>
-                    <input type="text" id="goalNote" placeholder="Description" name="description" />
-                  </div>
-                  <div class="input-group">
-                    <label for="dueDate">Due Date</label>
-                    <input type="date" id="goalNote" placeholder="Due Date" name="dueDate" />
-                  </div>
-                  <div class="input-group">
-                    <label for="priority">Priority</label>
-                    <select name="priority" id="priority">
-                      <option value="low">Low</option>
-                      <option value="medium">Medium</option>
-                      <option value="high">High</option>
-                    </select>
-                  </div>
-                  <button type="submit">Continue</button>
-                </form>
-              </div>
-            </div>
-          </div>
+                    <div class="input-group">
+                      <label for="description">Description</label>
+                      <input type="text" id="goalNote" placeholder="Description" name="description" />
+                    </div>
 
-          <div class="goals-header">
-            <div class="sub-texts">
-              <h1 class="text6">Tasks</h1>
-              <h2 class="text4">Here are your goals..</h2>
-            </div>
-            <button id="openGoalPopupBtn" class="btn1">
-              <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <title>add</title>
-                <g fill="none" class="nc-icon-wrapper">
-                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"></path>
-                </g>
-              </svg>
-              New Task
-            </button>
-          </div>
+                    <div class="input-group">
+                      <label for="dueDate">Due Date</label>
+                      <input type="date" id="goalDate" placeholder="Due Date" name="dueDate" />
+                    </div>
 
-          <div id="goalsList">
-            <% goals.forEach(function(item) { %>
-            <div class="goal-item">
-              <div class="goal-header">
-                <div class="goal-header-text">
-                  <h3><%= item.title %></h3>
-                  <p class="priority"><%= item.priority.toUpperCase() %></p>
-                  <p class="text7">Deadline: <%= item.deadline.toUpperCase() %></p>
-                </div>
-
-                <div class="icons">
-                  <p id="editGoal" onclick="openEditGoalModal('<%= item._id %>')">Edit</p>
-                  <button class="delete-btn" onclick="deleteGoal('<%= item._id %>')">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 48 48">
-                      <title>trash can</title>
-                      <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
-                        <path
-                          d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16"
-                          fill="none"
-                          stroke="#000000"
-                          stroke-divnecap="square"
-                          stroke-miterlimit="10"
-                        ></path>
-                        <line
-                          data-color="color-2"
-                          x1="4"
-                          y1="10"
-                          x2="44"
-                          y2="10"
-                          fill="none"
-                          stroke-linecap="square"
-                          stroke-miterlimit="10"
-                        ></line>
-                        <path
-                          data-cap="butt"
-                          data-color="color-2"
-                          d="M17,10V2H31v8"
-                          fill="none"
-                          stroke-miterlimit="10"
-                        ></path>
-                      </g>
-                    </svg>
-                  </button>
+                    <div class="input-group">
+                      <label for="priority">Priority</label>
+                      <select name="priority" id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                      </select>
+                    </div>
+                    <button type="submit">Continue</button>
+                  </form>
                 </div>
               </div>
-              <div class="goal-note">
-                <p><%= item.description %></p>
+            </div>
+
+            <div id="goalPopup" class="popup">
+              <div class="popup-content">
+                <span id="closeGoalPopupBtn" class="close">&times;</span>
+                <h1 class="text5">New Task</h1>
+
+                <div class="goal-container">
+                  <form class="goal-input" method="post" action="/api/goal/create-goal">
+                    <div class="input-group">
+                      <label for="title">Title</label>
+                      <input type="text" id="goalTitle" placeholder="Title" name="title" required />
+                    </div>
+                    <div class="input-group">
+                      <label for="description">Description</label>
+                      <input
+                        type="text"
+                        id="goalNote"
+                        placeholder="Description"
+                        name="description"
+                        required
+                      />
+                    </div>
+                    <div class="input-group">
+                      <label for="startTime">Start</label>
+                      <input
+                        type="datetime-local"
+                        id="goalNote"
+                        class="goalDate"
+                        name="startDate"
+                        required
+                        min=""
+                      />
+                    </div>
+                    <div class="input-group">
+                      <label for="dueDate">Due</label>
+                      <input
+                        type="datetime-local"
+                        id="goalNote"
+                        class="goalDate"
+                        name="dueDate"
+                        required
+                        min=""
+                      />
+                    </div>
+                    <div class="input-group">
+                      <label for="priority">Priority</label>
+                      <select name="priority" id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                      </select>
+                    </div>
+                    <button type="submit">Continue</button>
+                  </form>
+                </div>
               </div>
             </div>
-            <% }); %>
-          </div>
-          <div class="checkbook-container-header">
-            <div class="sub-texts">
-              <h1 class="text6">Goals</h1>
-              <h2 class="text4">Here are your goals..</h2>
-            </div>
-            <button id="openTaskPopupBtn" class="btn1">
-              <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <title>add</title>
-                <g fill="none" class="nc-icon-wrapper">
-                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"></path>
-                </g>
-              </svg>
-              New Goal
-            </button>
-          </div>
-          <div class="checkbook-container">
-            <ul id="checkbook-list">
-              <% tasks.forEach(function(item) { %>
-              <li class="<%= item.isCompleted ? 'crust' : '' %>">
-                <div class="item-text-wrapper">
-                  <input type="checkbox" <%= item.isCompleted ? "checked" : '' %>
-                  onclick="toggleTaskStatus('<%= item._id %>', '<%= item.isCompleted %>')" />
-                  <span class="item-text"><%= item.title %></span>
-                  <span class="item-text-sm"><%= item.created %></span>
-                </div>
-                <svg
-                  class="delete-button"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24"
-                  width="24"
-                  viewBox="0 0 48 48"
-                  onclick="deleteTask('<%= item._id %>')"
-                >
-                  <title>trash can</title>
-                  <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
-                    <path
-                      d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16"
-                      fill="none"
-                      stroke="#000000"
-                      stroke-linecap="square"
-                      stroke-miterlimit="10"
-                    ></path>
-                    <line
-                      data-color="color-2"
-                      x1="4"
-                      y1="10"
-                      x2="44"
-                      y2="10"
-                      fill="none"
-                      stroke-linecap="square"
-                      stroke-miterlimit="10"
-                    ></line>
-                    <path
-                      data-cap="butt"
-                      data-color="color-2"
-                      d="M17,10V2H31v8"
-                      fill="none"
-                      stroke-miterlimit="10"
-                    ></path>
+
+            <div class="checkbook-container-header">
+              <div class="sub-texts">
+                <h1 class="text6">Goals</h1>
+                <h2 class="text4">Here are your goals..</h2>
+              </div>
+              <button id="openTaskPopupBtn" class="btn1">
+                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <title>add</title>
+                  <g fill="none" class="nc-icon-wrapper">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"></path>
                   </g>
                 </svg>
-              </li>
+                New Goal
+              </button>
+            </div>
+
+            <div class="checkbook-container">
+              <ul id="checkbook-list">
+                <% tasks.forEach(function(item) { %>
+                <li class="<%= item.isCompleted ? 'crust' : '' %>">
+                  <div class="item-text-wrapper">
+                    <input type="checkbox" <%= item.isCompleted ? "checked" : '' %>
+                    onclick="toggleTaskStatus('<%= item._id %>', '<%= item.isCompleted %>')" />
+                    <span class="item-text"><%= item.title %></span>
+                    <span class="item-text-sm"><%= item.created %></span>
+                  </div>
+                  <svg
+                    class="delete-button"
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    width="24"
+                    viewBox="0 0 48 48"
+                    onclick="deleteTask('<%= item._id %>')"
+                  >
+                    <title>trash can</title>
+                    <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
+                      <path
+                        d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16"
+                        fill="none"
+                        stroke="#000000"
+                        stroke-linecap="square"
+                        stroke-miterlimit="10"
+                      ></path>
+                      <line
+                        data-color="color-2"
+                        x1="4"
+                        y1="10"
+                        x2="44"
+                        y2="10"
+                        fill="none"
+                        stroke-linecap="square"
+                        stroke-miterlimit="10"
+                      ></line>
+                      <path
+                        data-cap="butt"
+                        data-color="color-2"
+                        d="M17,10V2H31v8"
+                        fill="none"
+                        stroke-miterlimit="10"
+                      ></path>
+                    </g>
+                  </svg>
+                </li>
+                <% }); %>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content">
+            <div class="goals-header">
+              <div class="sub-texts">
+                <h1 class="text6">Tasks</h1>
+                <h2 class="text4">Here are your tasks..</h2>
+              </div>
+              <button id="openGoalPopupBtn" class="btn1">
+                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <title>add</title>
+                  <g fill="none" class="nc-icon-wrapper">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"></path>
+                  </g>
+                </svg>
+                New Task
+              </button>
+            </div>
+
+            <div id="goalsList">
+              <% goals.forEach(function(item) { %>
+              <div class="goal-item">
+                <div class="goal-header">
+                  <div class="goal-header-text">
+                    <h3><%= item.title %></h3>
+                    <p class="priority"><%= item.priority.toUpperCase() %></p>
+                    <p class="text7">Deadline: <%= item.deadline.toUpperCase() %></p>
+                  </div>
+
+                  <div class="icons">
+                    <p id="editGoal" onclick="openEditGoalModal('<%= item._id %>')">Edit</p>
+                    <button class="delete-btn" onclick="deleteGoal('<%= item._id %>')">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 48 48">
+                        <title>trash can</title>
+                        <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
+                          <path
+                            d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16"
+                            fill="none"
+                            stroke="#000000"
+                            stroke-divnecap="square"
+                            stroke-miterlimit="10"
+                          ></path>
+                          <line
+                            data-color="color-2"
+                            x1="4"
+                            y1="10"
+                            x2="44"
+                            y2="10"
+                            fill="none"
+                            stroke-linecap="square"
+                            stroke-miterlimit="10"
+                          ></line>
+                          <path
+                            data-cap="butt"
+                            data-color="color-2"
+                            d="M17,10V2H31v8"
+                            fill="none"
+                            stroke-miterlimit="10"
+                          ></path>
+                        </g>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="goal-note">
+                  <p><%= item.description %></p>
+                </div>
+              </div>
               <% }); %>
-            </ul>
+            </div>
           </div>
         </div>
 

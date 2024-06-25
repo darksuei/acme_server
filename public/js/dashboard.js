@@ -69,33 +69,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 });
 document.addEventListener("DOMContentLoaded", function () {
-  const checkbookList = document.getElementById("checkbook-list");
+  setMinDate();
   const newItemInput = document.getElementById("new-item-input");
   const addButton = document.getElementById("add-button");
   const popupButton = document.getElementById("popup-button");
   const popup = document.getElementById("popup");
   const closeButton = document.querySelector(".close-button");
-
-  //   checkbookList.addEventListener("click", function (e) {
-  //     if (e.target.classList.contains("checkbox")) {
-  //       const listItem = e.target.parentElement;
-  //       listItem.classList.toggle("crust");
-  //     }
-
-  //     if (e.target.classList.contains("delete-button")) {
-  //       e.target.parentElement.remove();
-  //     }
-  //   });
-
-  // addButton.addEventListener('click', function() {
-  //     const newItemText = newItemInput.value.trim();
-  //     if (newItemText !== '') {
-  //         const newItem = document.createElement('li');
-  //         newItem.innerHTML = `<input type="checkbox" class="checkbox"><span class="item-text">${newItemText}</span><svg class="delete-button" xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 48 48"><title>trash can</title><g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper"><path d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16" fill="none" stroke="#000000" stroke-linecap="square" stroke-miterlimit="10"></path><line data-color="color-2" x1="4" y1="10" x2="44" y2="10" fill="none" stroke-linecap="square" stroke-miterlimit="10"></line><path data-cap="butt" data-color="color-2" d="M17,10V2H31v8" fill="none" stroke-miterlimit="10"></path></g></svg>`;
-  //         checkbookList.appendChild(newItem);
-  //         newItemInput.value = '';
-  //     }
-  // });
 
   newItemInput.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
@@ -168,4 +147,20 @@ function addGoal() {
 function deleteGoal(button) {
   var goalItem = button.closest(".goal-item");
   goalItem.remove();
+}
+
+function setMinDate() {
+  var dateInputs = document.querySelectorAll(".goalDate");
+
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+
+  dateInputs.forEach((dateInput) => {
+    const minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+    dateInput.min = minDateTime;
+  });
 }

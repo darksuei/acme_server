@@ -4,7 +4,7 @@ const moment = require("moment");
 
 const renderDashboardElements = async (user) => {
   const tasks = await Task.find({ userId: user._id });
-  const goals = await Goal.find({ userId: user._id });
+  const goals = await Goal.find({ userId: user._id, dueDate: { $gt: new Date() } });
   const currentDate = moment().format("dddd, Do MMMM");
 
   tasks.map((task) => {
