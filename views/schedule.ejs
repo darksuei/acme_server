@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="/css/schedule.css" />
     <link rel="stylesheet" href="/css/mobile.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css" />
+    <!-- <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" /> -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js"></script>
+    <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const goals = <%- JSON.stringify(goals) %>;
@@ -231,13 +233,40 @@
 
       <% if (hasSchedule == true) { %>
       <main class="schedule-main">
-        <!-- <h1>Your Schedule</h1> -->
-        <div id="calendar" class="calender"></div>
+        <div id="calendar" class="calendar"></div>
       </main>
       <% } else { %>
       <p class="no-schedule">You don't have an active schedule!</p>
       <% } %>
     </section>
     <script src="/js/acme.js"></script>
+    <!-- <script src="/js/calendar.js"></script> -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const goals = <%- JSON.stringify(goals) %>;
+        // const goals = JSON.parse(goals_str);
+
+        const events = goals.map((goal) => {
+          return {
+            title: goal.title,
+            start: goal.createdAt,
+            end: goal.dueDate,
+          };
+        });
+
+        var calendarEl = document.getElementById("calendar");
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "dayGridMonth",
+          headerToolbar: {
+            left: 'prev, next, today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          },
+          events: events,
+          editable: true
+        });
+        calendar.render();
+      });
+    </script>
   </body>
 </html>

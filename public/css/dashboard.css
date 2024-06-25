@@ -102,10 +102,15 @@ h4 {
 
 main {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
-  padding: 2em;
+  padding: 0em 2em 2em;
   width: calc(100vw - 300px);
+}
+
+.main-content-wrapper {
+  display: flex;
+  flex-direction: row;
 }
 
 .main-content {
@@ -123,11 +128,11 @@ main {
 
 .content-header {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 1.5em;
   min-height: 100px;
-  padding-inline: 1em;
 }
 .content-header-texts {
   display: flex;
@@ -304,7 +309,6 @@ input {
   justify-content: space-between;
   align-items: center;
   margin-top: 1em;
-  padding-inline: 1em;
   margin-bottom: 1em;
 }
 
@@ -366,10 +370,11 @@ input {
   width: 16px;
 }
 
-.calender {
+#calendar {
   min-width: 450px;
   max-height: 525px;
   cursor: pointer;
+  border: 1px solid #c9c9c9;
 }
 
 .input-group {
@@ -450,6 +455,7 @@ input {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1em;
 }
 
 .sub-texts {

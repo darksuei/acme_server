@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="/css/dashboard.css" />
     <link rel="stylesheet" href="/css/mobile.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js"></script>
     <title>TaskMaster | Dashboard</title>
+    <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
+    <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const goals = <%- JSON.stringify(goals) %>;
@@ -223,27 +224,32 @@
       </nav>
 
       <main>
-        <div class="main-content">
-          <div class="content">
-            <div class="content-header">
-              <div class="content-header-texts">
-                <h1 class="text3"><%= currentDate %></h1>
-              </div>
+        <div class="content-header">
+          <div class="content-header-texts">
+            <h1 class="text3"><%= currentDate %></h1>
+          </div>
 
-              <div class="btn-group">
-                <button class="btn1" onclick="generateSchedule('<%= user.hasSchedule %>')">
-                  <%= user.hasSchedule === true ? 'Regenerate Schedule' : 'Create a Schedule' %>
-                </button>
-              </div>
-            </div>
-
+          <div class="btn-group">
+            <button class="btn1" onclick="generateSchedule('<%= user.hasSchedule %>')">
+              <%= user.hasSchedule === true ? 'Regenerate Schedule' : 'Create a Schedule' %>
+            </button>
+          </div>
+        </div>
+        <div class="main-content-wrapper">
+          <div class="main-content">
             <div id="taskPopup" class="popup">
               <div class="popup-content">
                 <span id="closeTaskPopupBtn" class="close">&times;</span>
                 <h1 class="text5">New Goal</h1>
                 <form method="post" action="/api/task/create-task">
                   <div class="input-group">
-                    <input type="text" class="new-item-input" name="title" required placeholder="Title" />
+                    <label for="title">Title</label>
+                    <input type="text" id="goalTitle" placeholder="Title" name="title" />
+                  </div>
+
+                  <div class="input-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="goalNote" placeholder="Description" name="description" />
                   </div>
                   <button type="submit" id="add-button" class="task-button">Continue</button>
                 </form>
@@ -342,152 +348,153 @@
               </div>
             </div>
 
-            <div class="checkbook-container-header">
-              <div class="sub-texts">
-                <h1 class="text6">Goals</h1>
-                <h2 class="text4">Here are your goals..</h2>
-              </div>
-              <button id="openTaskPopupBtn" class="btn1">
-                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <title>add</title>
-                  <g fill="none" class="nc-icon-wrapper">
-                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"></path>
-                  </g>
-                </svg>
-                New Goal
-              </button>
-            </div>
-
-            <div class="checkbook-container">
-              <ul id="checkbook-list">
-                <% tasks.forEach(function(item) { %>
-                <li class="<%= item.isCompleted ? 'crust' : '' %>">
-                  <div class="item-text-wrapper">
-                    <input type="checkbox" <%= item.isCompleted ? "checked" : '' %>
-                    onclick="toggleTaskStatus('<%= item._id %>', '<%= item.isCompleted %>')" />
-                    <span class="item-text"><%= item.title %></span>
-                    <span class="item-text-sm"><%= item.created %></span>
-                  </div>
-                  <svg
-                    class="delete-button"
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24"
-                    width="24"
-                    viewBox="0 0 48 48"
-                    onclick="deleteTask('<%= item._id %>')"
-                  >
-                    <title>trash can</title>
-                    <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
-                      <path
-                        d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16"
-                        fill="none"
-                        stroke="#000000"
-                        stroke-linecap="square"
-                        stroke-miterlimit="10"
-                      ></path>
-                      <line
-                        data-color="color-2"
-                        x1="4"
-                        y1="10"
-                        x2="44"
-                        y2="10"
-                        fill="none"
-                        stroke-linecap="square"
-                        stroke-miterlimit="10"
-                      ></line>
-                      <path
-                        data-cap="butt"
-                        data-color="color-2"
-                        d="M17,10V2H31v8"
-                        fill="none"
-                        stroke-miterlimit="10"
-                      ></path>
+            <div class="content">
+              <div class="goals-header">
+                <div class="sub-texts">
+                  <h1 class="text6">Tasks</h1>
+                  <h2 class="text4">Here are your tasks..</h2>
+                </div>
+                <button id="openGoalPopupBtn" class="btn1">
+                  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <title>add</title>
+                    <g fill="none" class="nc-icon-wrapper">
+                      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"></path>
                     </g>
                   </svg>
-                </li>
+                  New Task
+                </button>
+              </div>
+
+              <div id="goalsList">
+                <% goals.forEach(function(item) { %>
+                <div class="goal-item">
+                  <div class="goal-header">
+                    <div class="goal-header-text">
+                      <h3><%= item.title %></h3>
+                      <p class="priority"><%= item.priority.toUpperCase() %></p>
+                      <p class="text7">Deadline: <%= item.deadline.toUpperCase() %></p>
+                    </div>
+
+                    <div class="icons">
+                      <p id="editGoal" onclick="openEditGoalModal('<%= item._id %>')">Edit</p>
+                      <button class="delete-btn" onclick="deleteGoal('<%= item._id %>')">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 48 48">
+                          <title>trash can</title>
+                          <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
+                            <path
+                              d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16"
+                              fill="none"
+                              stroke="#000000"
+                              stroke-divnecap="square"
+                              stroke-miterlimit="10"
+                            ></path>
+                            <line
+                              data-color="color-2"
+                              x1="4"
+                              y1="10"
+                              x2="44"
+                              y2="10"
+                              fill="none"
+                              stroke-linecap="square"
+                              stroke-miterlimit="10"
+                            ></line>
+                            <path
+                              data-cap="butt"
+                              data-color="color-2"
+                              d="M17,10V2H31v8"
+                              fill="none"
+                              stroke-miterlimit="10"
+                            ></path>
+                          </g>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="goal-note">
+                    <p><%= item.description %></p>
+                  </div>
+                </div>
                 <% }); %>
-              </ul>
+              </div>
+            </div>
+
+            <div class="content">
+              <div class="checkbook-container-header">
+                <div class="sub-texts">
+                  <h1 class="text6">Goals</h1>
+                  <h2 class="text4">Here are your goals..</h2>
+                </div>
+                <button id="openTaskPopupBtn" class="btn1">
+                  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <title>add</title>
+                    <g fill="none" class="nc-icon-wrapper">
+                      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"></path>
+                    </g>
+                  </svg>
+                  New Goal
+                </button>
+              </div>
+
+              <div id="checkbook-list">
+                <% tasks.forEach(function(item) { %>
+                <div class="goal-item">
+                  <div class="goal-header">
+                    <div class="goal-header-text">
+                      <h3><%= item.title %></h3>
+                    </div>
+
+                    <div class="icons">
+                      <button class="delete-btn" onclick="deleteTask('<%= item._id %>')">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 48 48">
+                          <title>trash can</title>
+                          <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
+                            <path
+                              d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16"
+                              fill="none"
+                              stroke="#000000"
+                              stroke-divnecap="square"
+                              stroke-miterlimit="10"
+                            ></path>
+                            <line
+                              data-color="color-2"
+                              x1="4"
+                              y1="10"
+                              x2="44"
+                              y2="10"
+                              fill="none"
+                              stroke-linecap="square"
+                              stroke-miterlimit="10"
+                            ></line>
+                            <path
+                              data-cap="butt"
+                              data-color="color-2"
+                              d="M17,10V2H31v8"
+                              fill="none"
+                              stroke-miterlimit="10"
+                            ></path>
+                          </g>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="goal-note">
+                    <p><%= item.description %></p>
+                  </div>
+                </div>
+                <% }); %>
+              </div>
             </div>
           </div>
 
-          <div class="content">
-            <div class="goals-header">
-              <div class="sub-texts">
-                <h1 class="text6">Tasks</h1>
-                <h2 class="text4">Here are your tasks..</h2>
-              </div>
-              <button id="openGoalPopupBtn" class="btn1">
-                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <title>add</title>
-                  <g fill="none" class="nc-icon-wrapper">
-                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#ffffff"></path>
-                  </g>
-                </svg>
-                New Task
-              </button>
-            </div>
-
-            <div id="goalsList">
-              <% goals.forEach(function(item) { %>
-              <div class="goal-item">
-                <div class="goal-header">
-                  <div class="goal-header-text">
-                    <h3><%= item.title %></h3>
-                    <p class="priority"><%= item.priority.toUpperCase() %></p>
-                    <p class="text7">Deadline: <%= item.deadline.toUpperCase() %></p>
-                  </div>
-
-                  <div class="icons">
-                    <p id="editGoal" onclick="openEditGoalModal('<%= item._id %>')">Edit</p>
-                    <button class="delete-btn" onclick="deleteGoal('<%= item._id %>')">
-                      <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 48 48">
-                        <title>trash can</title>
-                        <g stroke-width="1" fill="#000000" stroke="#000000" class="nc-icon-wrapper">
-                          <path
-                            d="M39,16,37.249,42.266A4,4,0,0,1,33.258,46H14.742a4,4,0,0,1-3.991-3.734L9,16"
-                            fill="none"
-                            stroke="#000000"
-                            stroke-divnecap="square"
-                            stroke-miterlimit="10"
-                          ></path>
-                          <line
-                            data-color="color-2"
-                            x1="4"
-                            y1="10"
-                            x2="44"
-                            y2="10"
-                            fill="none"
-                            stroke-linecap="square"
-                            stroke-miterlimit="10"
-                          ></line>
-                          <path
-                            data-cap="butt"
-                            data-color="color-2"
-                            d="M17,10V2H31v8"
-                            fill="none"
-                            stroke-miterlimit="10"
-                          ></path>
-                        </g>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-                <div class="goal-note">
-                  <p><%= item.description %></p>
-                </div>
-              </div>
-              <% }); %>
-            </div>
-          </div>
+          <div id="calendar"></div>
         </div>
-
-        <div id="calendar" class="calender"></div>
       </main>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="/js/dashboard.js"></script>
     <script src="/js/api.js"></script>
     <script src="/js/acme.js"></script>
+    <script src="/js/calendar.js"></script>
     <script>
       function getQueryStringParams() {
         const params = {};

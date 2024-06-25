@@ -2,10 +2,11 @@ const Task = require("../../models/task");
 
 const postCreateTask = async (req, res) => {
   try {
-    const { title } = req.body;
+    const { title, description } = req.body;
 
     const task = new Task({
       title,
+      description,
       userId: req.user._id,
     });
 

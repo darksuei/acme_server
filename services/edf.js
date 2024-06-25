@@ -1,5 +1,5 @@
-const scheduleEDF = (goals, startIndex = 0) => {
-  if (!Array.isArray(goals)) throw new Error("Input must be an array of objects.");
+const scheduleEDF = (tasks, startIndex = 0) => {
+  if (!Array.isArray(tasks)) throw new Error("Input must be an array of objects.");
 
   const priorityOrder = {
     high: 1,
@@ -7,20 +7,21 @@ const scheduleEDF = (goals, startIndex = 0) => {
     low: 3,
   };
 
-  goals.sort((a, b) => {
+  tasks.sort((a, b) => {
     if (a.dueDate.getTime() - b.dueDate.getTime() !== 0) {
       return a.dueDate.getTime() - b.dueDate.getTime();
+    } else {
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
     }
-    return priorityOrder[a.priority] - priorityOrder[b.priority];
   });
 
-  goals.forEach(async (goal, index) => {
-    goal.edfIndex = startIndex + index;
+  tasks.forEach(async (task, index) => {
+    task.edfIndex = startIndex + index;
 
-    await goal.save();
+    await task.save();
   });
 
-  return goals;
+  return tasks;
 };
 
 module.exports = scheduleEDF;

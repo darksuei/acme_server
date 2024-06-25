@@ -2,7 +2,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   body {
     overflow-x: hidden;
     padding: 0;
@@ -36,6 +36,12 @@
     cursor: pointer;
     z-index: 99999999999;
   }
+
+  main {
+    width: 100%;
+    padding: 0 1.5em !important;
+  }
+
   main,
   .content-header,
   .content {
@@ -49,13 +55,24 @@
     padding-inline: 0;
   }
 
+  .content-header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-content-wrapper {
+    flex-direction: column;
+    gap: 1.5em;
+  }
+
   .content {
     gap: 1em;
     width: 90%;
   }
 
   .content-header {
-    gap: 1.25em;
+    flex-direction: row;
+    align-items: center;
     width: 100%;
   }
   .checkbook-container {
@@ -70,7 +87,6 @@
     width: 95%;
   }
   .btn-group {
-    width: 94%;
     justify-content: space-between;
   }
 
@@ -78,7 +94,8 @@
     width: 90%;
     margin-inline: auto;
     align-items: flex-start;
-    margin-bottom: 5em;
+    margin-bottom: 3em;
+    margin-top: 1.5em;
   }
 
   .main-content.settings-main-content {
@@ -103,5 +120,11 @@
 
   .new-schedule-main-content .icons {
     width: 100%;
+  }
+
+  #calendar {
+    height: 400px;
+    width: 100%;
+    min-width: 100%;
   }
 }
