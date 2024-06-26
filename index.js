@@ -87,7 +87,8 @@ app.get("/new-schedule", authenticateClient, async (req, res) => {
 
   goals.map((goal) => {
     goal.created = moment(goal.createdAt).fromNow();
-    goal.deadline = moment(goal.dueDate).format("LL");
+    goal.deadline = moment(goal.dueDate).format("LT");
+    goal.date = moment(goal.dueDate).format("LL");
     return goal;
   });
 
@@ -103,7 +104,7 @@ app.get("/schedule", authenticateClient, async (req, res) => {
 
   goals.map((goal) => {
     goal.created = moment(goal.createdAt).fromNow();
-    goal.deadline = moment(goal.dueDate).format("LL");
+    goal.deadline = moment(goal.dueDate).format("LLL");
     return goal;
   });
 

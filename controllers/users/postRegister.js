@@ -1,6 +1,6 @@
 const User = require("../../models/user");
 const bcrypt = require("bcrypt");
-const { createNotificationSubscriber } = require("../../services/novu");
+const { createNotificationSubscriber, sendNewUserEmail } = require("../../services/novu");
 
 const postRegister = async (req, res) => {
   try {
@@ -19,6 +19,11 @@ const postRegister = async (req, res) => {
     user = await user.save();
 
     await createNotificationSubscriber({
+      id: String(user._id),
+      email,
+    });
+
+    await sendNewUserEmail({
       id: String(user._id),
       email,
     });

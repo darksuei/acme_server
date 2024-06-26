@@ -32,8 +32,18 @@ const sendNewScheduleEmail = async ({ id, email, goalsCount }) => {
   });
 };
 
+const sendNewUserEmail = async ({ id, email }) => {
+  novu.trigger("new-user", {
+    to: {
+      subscriberId: id,
+      email: email,
+    },
+  });
+};
+
 module.exports = {
   createNotificationSubscriber,
   sendTaskDeadlineEmail,
   sendNewScheduleEmail,
+  sendNewUserEmail,
 };

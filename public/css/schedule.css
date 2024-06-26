@@ -46,7 +46,17 @@ body {
   font-weight: 600;
   font-size: 32px;
   margin: 0;
-  text-align: left;
+  text-align: center;
+  margin-top: 1em;
+}
+
+.goal-header-text {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.goals-note {
+  margin-block: 0 !important;
 }
 
 .btn3 {

@@ -14,7 +14,7 @@ const renderDashboardElements = async (user) => {
 
   goals.map((goal) => {
     goal.created = moment(goal.createdAt).fromNow();
-    goal.deadline = moment(goal.dueDate).format("LL");
+    goal.deadline = moment(goal.dueDate).format("LLL");
     return goal;
   });
 

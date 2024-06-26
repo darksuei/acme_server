@@ -197,7 +197,7 @@
       </nav>
 
       <main class="new-schedule-main-content">
-        <h1 class="text3">Create Schedule</h1>
+        <h1 class="text3">Schedule</h1>
         <p class="goals-note">
           *Tasks have been sorted in order of priority according to the EDF algorithm, you can change the
           priorities and save to create the schedule.
@@ -210,10 +210,10 @@
                 <h3><%= item.title %></h3>
                 <p class="priority"><%= item.priority.toUpperCase() %> PRIORITY</p>
                 <p class="text7">Deadline: <%= item.deadline %></p>
+                <p class="text7">Date: <%= item.date %></p>
               </div>
 
-              <div class="icons">
-                <!-- <p id="editGoal">Edit</p> -->
+              <!-- <div class="icons">
                 <button class="delete-btn" onclick="deleteGoal('<%= item._id %>')">
                   <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 48 48">
                     <title>trash can</title>
@@ -248,7 +248,7 @@
                 <button class="make-priority" onclick="patchPriority('<%= item._id %>')">
                   Make Priotity
                 </button>
-              </div>
+              </div> -->
             </div>
           </div>
           <% }); %>
